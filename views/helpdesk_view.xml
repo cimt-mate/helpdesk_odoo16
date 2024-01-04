@@ -1,0 +1,55 @@
+<odoo>
+    <record id="view_helpdesk_ticket_form" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form</field>
+        <field name="model">cimt_helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <form string="Helpdesk Ticket">
+                <sheet>
+                    <group>
+                        <field name="customer_id" widget="many2one"
+                            options="{'no_create':
+                        True}" />
+                        <field name="user_name" />
+                        <field name="ticket_date" />
+                        <field name="worker_name" />
+                        <field name="ticket_minutes" />
+                    </group>
+                    <group>
+                        <field name="ticket_detail" widget="text" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_helpdesk_ticket" model="ir.actions.act_window">
+        <field name="name">Tickets</field>
+        <field name="res_model">cimt_helpdesk.ticket</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new ticket
+            </p>
+        </field>
+    </record>
+    <record id="view_helpdesk_ticket_tree" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.tree</field>
+        <field name="model">cimt_helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <tree string="Helpdesk Ticket">
+                <field name="ticket_detail" />
+                <field name="customer_id" />
+                <field name="ticket_date" />
+                <field name="worker_name" />
+                <field name="ticket_minutes" />
+                <field name="user_name" />
+
+            </tree>
+        </field>
+    </record>
+    <menuitem id="menu_helpdesk" name="Helpdesk"
+        sequence="10" />
+    <menuitem id="menu_helpdesk_ticket" name="Tickets"
+        parent="menu_helpdesk"
+        action="action_helpdesk_ticket"
+        sequence="1" />
+</odoo>
