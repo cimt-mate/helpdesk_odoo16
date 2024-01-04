@@ -36,8 +36,8 @@
         <field name="model">cimt_helpdesk.ticket</field>
         <field name="arch" type="xml">
             <tree string="Helpdesk Ticket">
-                <field name="ticket_detail" />
                 <field name="customer_id" />
+                <field name="ticket_detail" />
                 <field name="ticket_date" />
                 <field name="worker_name" />
                 <field name="ticket_minutes" />
