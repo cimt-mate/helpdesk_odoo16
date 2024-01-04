@@ -7,6 +7,7 @@ class HelpdeskTicket(models.Model):
     customer_id = fields.Many2one(
         'res.partner', 
         string='Customer', 
+        # Change to client
         domain=[('is_client', '=', True)], 
         required=True,
         help="Select a customer from the list of partners who are marked as customers."
