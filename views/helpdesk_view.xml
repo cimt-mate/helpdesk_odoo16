@@ -1,4 +1,5 @@
 <odoo>
+    <!-- Define the form list -->
     <record id="view_helpdesk_ticket_form" model="ir.ui.view">
         <field name="name">helpdesk.ticket.form</field>
         <field name="model">cimt_helpdesk.ticket</field>
@@ -21,10 +22,28 @@
             </form>
         </field>
     </record>
+
+    <!-- Define the search view -->
+    <record id="view_helpdesk_ticket_search" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.search</field>
+        <field name="model">cimt_helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <search string="Search Helpdesk Ticket">
+                <field name="customer_id" string="Customer" />
+                <field name="ticket_detail" string="Ticket Detail" />
+                <field name="user_name" string="User Name" />
+                <field name="worker_name" string="Worker Name" />
+            </search>
+        </field>
+    </record>
+
+    <!-- Define the action -->
     <record id="action_helpdesk_ticket" model="ir.actions.act_window">
         <field name="name">Tickets</field>
         <field name="res_model">cimt_helpdesk.ticket</field>
         <field name="view_mode">tree,form</field>
+        <!-- Specify search -->
+        <field name="search_view_id" ref="view_helpdesk_ticket_search" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new ticket
@@ -46,6 +65,8 @@
             </tree>
         </field>
     </record>
+
+
     <menuitem id="menu_helpdesk" name="Helpdesk"
         sequence="10" />
     <menuitem id="menu_helpdesk_ticket" name="Tickets"
