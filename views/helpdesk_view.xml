@@ -39,8 +39,8 @@
                 <field name="ticket_detail" />
                 <field name="customer_id" />
                 <field name="ticket_date" />
-                <field name="worker_name" />
                 <field name="ticket_minutes" />
+                <field name="worker_name" />
                 <field name="user_name" />
 
             </tree>
