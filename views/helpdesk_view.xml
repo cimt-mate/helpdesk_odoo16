@@ -68,8 +68,9 @@
         <field name="report_file">helpdesk_odoo16.report_helpdesk_tickets_document</field>
         <field name="binding_model_id" ref="helpdesk_odoo16.model_cimt_helpdesk_ticket" />
         <field name="binding_type">report</field>
-        <field name="print_report_name">'WorkReport_%s' % (object.display_name or
-            '').replace('/', '_')</field>
+        <field name="print_report_name">'WorkReport_CIMT_' + (object.display_name.split(',')[-1] 
+            if object.display_name else '').replace('/', '_')</field>
+
             
     </record>
 
