@@ -1,4 +1,6 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
+import datetime
 
 class HelpdeskTicket(models.Model):
     _name = 'cimt_helpdesk.ticket'
@@ -36,5 +38,20 @@ class HelpdeskTicket(models.Model):
         return self.env.user.name
     
     def action_print_tickets(self):
-        # Ensure that 'active_ids' are passed correctly to this method
-        return self.env.ref('helpdesk_odoo16.action_report_helpdesk_tickets').report_action(self)
+        context = dict(self.env.context or {})
+        active_ids = context.get('active_ids', [])
+        
+        if not active_ids:
+            raise UserError(_("No tickets to print."))
+
+        tickets = self.env['cimt_helpdesk.ticket'].browse(active_ids)
+
+        # Example of custom file name: "Helpdesk_Tickets_YYYY-MM-DD"
+        report_name = f"Helpdesk_Tickets_{datetime.datetime.now().strftime('%Y-%m-%d')}"
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/report/pdf/helpdesk_odoo16.action_report_helpdesk_tickets/%s?download=true' % ','.join(map(str, active_ids)),
+            'target': 'new',
+            'print_report_name': report_name,
+        }
