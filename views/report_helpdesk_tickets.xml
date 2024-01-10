@@ -1,0 +1,37 @@
+<!-- views/report_helpdesk_tickets.xml -->
+<odoo>
+    <template id="report_helpdesk_tickets_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Customize the layout as needed -->
+
+                        <!-- Include any other fields as necessary -->
+                    </div>
+                    <div style="margin: 0 0 16px 0;">
+                        <h1 style="color: #875A7B;">Dr.Koutei Work Report</h1>
+                        <h2>Customer: <span t-field="doc.customer_id.name"/></h2>
+                        <p><strong>Contact Name:</strong> <span t-field="doc.worker_name"/></p>
+                    </div>
+                    <div style="border-top: 2px solid #875A7B; padding-top: 8px; margin-bottom: 16px;">
+                        <p style="font-weight: bold;">Revise report SQL: Schedule Process by Machine GR</p>
+                        <p>Date: <span t-field="doc.ticket_date"/></p>
+                        <p>User: <span t-field="doc.user_id.name"/> CIM: <span t-field="doc.cim_field"/></p>
+                        <!-- Include any other details as necessary -->
+                    </div>
+                    <div>
+                        <!-- The content of the report -->
+                        <p><strong>Ticket Details:</strong></p>
+                        <p style="white-space: pre-wrap;"><span t-field="doc.ticket_detail"/></p>
+                        <!-- Add more fields as necessary -->
+                    </div>
+                    <div style="border-top: 1px solid #000; padding-top: 8px; margin-top: 16px;">
+                        <p>Customer Acceptance</p>
+                        <p>____________________________</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

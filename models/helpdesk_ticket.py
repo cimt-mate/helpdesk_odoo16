@@ -4,6 +4,8 @@ class HelpdeskTicket(models.Model):
     _name = 'cimt_helpdesk.ticket'
     _description = 'Helpdesk Ticket'
 
+    cim_field = fields.Char(string='CIM Field')
+
     customer_id = fields.Many2one(
         'res.partner', 
         string='Customer', 
@@ -32,3 +34,7 @@ class HelpdeskTicket(models.Model):
     def _default_user_name(self):
         # Return the current user's login name
         return self.env.user.name
+    
+    def action_print_tickets(self):
+        # Ensure that 'active_ids' are passed correctly to this method
+        return self.env.ref('helpdesk_odoo16.action_report_helpdesk_tickets').report_action(self)
