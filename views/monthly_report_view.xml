@@ -1,0 +1,28 @@
+<odoo>
+    <record id="view_monthly_report_form" model="ir.ui.view">
+        <field name="name">monthly.report.form</field>
+        <field name="model">monthly.report</field>
+        <field name="arch" type="xml">
+            <form string="Monthly Report">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="report_date" />
+                        <field name="note" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_monthly_reports" model="ir.actions.act_window">
+        <field name="name">Monthly Reports</field>
+        <field name="res_model">monthly.report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_monthly_report" name="Monthly"
+        parent="menu_helpdesk"
+        action="action_monthly_reports"
+        sequence="2" />
+</odoo>

@@ -1,0 +1,54 @@
+<!-- views/report_helpdesk_tickets.xml -->
+<odoo>
+    <template id="report_helpdesk_tickets_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <!-- Custom header area -->
+                    <div style="text-align:right; margin-top:5px;">
+                        <!-- Company Logo -->
+                        <img t-if="doc.company_id.logo"
+                            t-att-src="'data:image/png;base64,%s' % doc.company_id.logo.decode()"
+                            style="max-height: 100px;" />
+                        <br />
+                        <br />
+                        <!-- Company Address
+                        <div>
+                            <span
+                                t-field="o.company_id.partner_id.street" />
+                            <br />
+                            <span
+                                t-esc="'%s %s' % (o.company_id.partner_id.street2, o.company_id.partner_id.country_id.name)" />
+                            <br />
+
+                            <span
+                                t-esc="'TEL %s FAX %s' % (o.company_id.partner_id.phone, o.company_id.partner_id.fax)" />
+                        </div> -->
+
+                    </div>
+                    <div class="page">
+                        <!-- Customize the layout as needed -->
+                        <h2>Helpdesk Ticket Report2</h2>
+                        <p>
+                            <strong>Customer:</strong>
+                            <span t-field="doc.customer_id.name" />
+                        </p>
+                        <p>
+                            <strong>Contact Name:</strong>
+                            <span t-field="doc.worker_name" />
+                        </p>
+                        <p>
+                            <strong>Ticket Date:</strong>
+                            <span t-field="doc.ticket_date" />
+                        </p>
+                        <p>
+                            <strong>Ticket Details:</strong>
+                            <span t-field="doc.ticket_detail" />
+                        </p>
+                        <!-- Include any other fields as necessary -->
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

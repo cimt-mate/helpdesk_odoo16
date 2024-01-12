@@ -63,6 +63,12 @@
                 <field name="user_name" />
 
             </tree>
+            <header>
+                <!-- Your new print button -->
+                <button string="Print Tickets" type="object" name="action_print_tickets"
+                    class="oe_highlight" />
+                <!-- Other buttons like 'Create' or 'Import' would also be defined here -->
+            </header>
         </field>
     </record>
 
@@ -73,4 +79,17 @@
         parent="menu_helpdesk"
         action="action_helpdesk_ticket"
         sequence="1" />
+
+    <!-- Define the action for the report -->
+    <record id="action_report_helpdesk_tickets" model="ir.actions.report">
+        <field name="name">Helpdesk Ticket Report</field>
+        <field name="model">cimt_helpdesk.ticket</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">helpdesk_odoo16.report_helpdesk_tickets_document</field>
+        <field name="report_file">helpdesk_odoo16.report_helpdesk_tickets_document</field>
+        <field name="binding_model_id" ref="model_cimt_helpdesk_ticket" />
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Helpdesk_Ticket_%s' % (object.display_name or
+            '').replace('/', '_')</field>
+    </record>
 </odoo>

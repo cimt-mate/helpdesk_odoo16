@@ -33,3 +33,7 @@ class HelpdeskTicket(models.Model):
     def _default_user_name(self):
         # Return the current user's login name
         return self.env.user.name
+    
+    def action_print_tickets(self):
+        # Ensure that 'active_ids' are passed correctly to this method
+        return self.env.ref('cimt_helpdesk.action_report_helpdesk_tickets').report_action(self.env.context.get('active_ids'))
