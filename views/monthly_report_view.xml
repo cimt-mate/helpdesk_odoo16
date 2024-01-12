@@ -59,7 +59,7 @@
         <field name="report_file">helpdesk_odoo16.report_monthly_tickets_document</field>
         <field name="binding_model_id" ref="helpdesk_odoo16.model_monthly_report"/>
         <field name="binding_type">report</field>
-        <field name="print_report_name">'WorkReport_CIMT_' + (object.display_name.split(',')[-1] 
+        <field name="print_report_name">'MonthlyReport_CIMT_' + (object.display_name.split(',')[-1] 
             if object.display_name else '').replace('/', '_')</field>
     </record>
 </odoo>

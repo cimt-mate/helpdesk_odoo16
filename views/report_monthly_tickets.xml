@@ -3,31 +3,200 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
-                    <t t-set="css" t-value="'/helpdesk_odoo16/static/src/css/report_style.css'"/>
+                    <head>
+                        <style>
+                            @font-face {
+                              font-family: 'NotoSansThai';
+                              src: url('/helpdesk_odoo16/static/font/NotoSansThaiUIRegular.ttf') format('truetype');
+                              font-weight: normal;
+                              font-style: normal;
+                            }
+                            .thai-text {
+                              font-family: 'NotoSansThai', sans-serif;
+                            }
+                          </style>
+                        </head>
                     <div class="page">
                         <div style="display: flex; justify-content: space-between; align-items: top;">
                             <div>
-                                <h1>Dr.Koutei Monthly Report</h1>
-                                <h2>Name: <span t-field="doc.name"/></h2>
+                                <h1 style="padding-left: 10px; color: #000; padding-top: 10px; font-weight: bold;">Dr.Koutei :</h1>
+                                <h1 style="padding-left: 10px; color: #000; font-weight: bold;">Maintenance Report </h1>
+                                <!-- <p><strong>Contact Name:</strong> <span t-field="doc.worker_name"/></p> -->
+
                             </div>
                             <div>
-                                <img src="/helpdesk_odoo16/static/image/CIM-LOGO_ADDRESS.png" alt="Company Logo" style="max-height: 135px;"/>
+                                <!-- Here is where we add the image -->
+                                <img src="/helpdesk_odoo16/static/image/CIM-LOGO_ADDRESS.png" style="max-height: 135px; margin-right:20px"/>
                             </div>
                         </div>
 
-                        <div class="report-container">
-                            <h5>Dr.Koutei Monthly Report</h5>
-                            <div class="report-content">
-                                <p><span t-field="doc.note"/></p>
+                        <div style="display: flex; justify-content: space-between; align-items: top; padding-bottom: 10px;">
+                            <div style="padding-top: 40px; padding-left:10px; ">
+                                <h4 style="padding-bottom:5px; border-bottom: 2px solid #000; width: 350px; height: 30px;"><a style=" color: #000; font-weight: bold;">Customer : </a> <span style="color: #000; " t-field="doc.name"/></h4>
+                                <h4 style="padding-bottom:5px; border-bottom: 2px solid #000; width: 350px; height: 30px;"><a style=" color: #000; font-weight: bold;">Location  : </a> <span style="color: #000; " t-field="doc.name"/></h4>
                             </div>
-                            <div class="report-date">
-                                <p>Date: <span t-field="doc.report_date"/></p>
+                            <div>
+                                <table class="date-info" style="height: 100px; margin-right:25px">
+                                    <!-- Table headers -->
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Date</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-field="doc.name"/></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Start Time</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-field="doc.name"/></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">End Time</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-field="doc.name"/></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Work Hours</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-field="doc.name"/></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Operator</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-field="doc.name"/></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                </table>
                             </div>
                         </div>
 
-                        <div class="signature">
-                            <img src="/helpdesk_odoo16/static/image/signature.png" alt="Signature" style="max-height: 130px;"/>
+
+                        <table style="width: 910px; border-collapse: collapse; border: 1px solid black; text-align: left;">
+                            <thead>
+                                <tr>
+                                    <th style="color: #FFF; font-weight: bold; background-color: #808080; border: 2px solid black; text-align: center;" colspan="10">Server Information</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 1-->
+                                <tr>
+                                    <th style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; padding-left:10px; background-color:#D3D3D3;" rowspan="6" colspan="2">Server</th>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="2" colspan="1">Drive <span t-field="doc.name"/></td>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="1" colspan="1">Total Size</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2"><span t-field="doc.name"/></td>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="3" colspan="2">Backup Size</td>
+                                    <td style="color: #000; padding-left: 5px; text-align: left;border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="1">Data</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right;border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="1"><span t-field="doc.name"/></td>
+                                </tr>
+                                <!-- 2-->
+                                <tr>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="1" colspan="1" >Free Space</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
+                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="1">Basic</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="1"><span t-field="doc.name"/></td>
+                                </tr>
+                                <!-- 3-->
+                                <tr>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="2" colspan="1" >Drive <span t-field="doc.name"/></td>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="1" colspan="1" >Total Space</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right;border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
+                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="1">Evolio</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="1"><span t-field="doc.name"/></td>
+                                </tr>
+                                <!-- 4-->
+                                <tr>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="1" colspan="1" >Free Space</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right;  border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
+                                    <td style="color: #000; padding-left: 5px; text-align: left;  border: 1px solid black; background-color:#D3D3D3;" rowspan="3" colspan="2">Backup Status</td>
+                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="3" colspan="2"><span t-field="doc.name"/></td>
+                                </tr>
+                                <!-- 5-->
+                                <tr>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="2" colspan="1" >Drive <span t-field="doc.name"/></td>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="1" colspan="1" >Total Space</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right;border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
+                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                </tr>
+                                <!-- 6-->
+                                <tr>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="1" colspan="1" >Free Space</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
+                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                </tr>
+                                <!-- 7-->
+                                <tr>
+                                    <th style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; padding-left:10px; background-color:#D3D3D3;" rowspan="4" colspan="2">Database</th>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="2" colspan="1">Doctor Data</td>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="1" colspan="1">Total Size</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2"><span t-field="doc.name"/></td>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="4" colspan="2">Oracle Logs</td>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="4" colspan="2"><span t-field="doc.name"/></td>
+                                </tr>
+                                <!-- 8-->
+                                 <tr>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="1" colspan="1" >Free Space</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
+                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                </tr>
+                                <!-- 9-->
+                                 <tr>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="2" colspan="1">Doctor Data</td>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="1" colspan="1" >Total Size</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
+                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                </tr>
+                                <!-- 10-->
+                                <tr>
+                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;" rowspan="1" colspan="1" >Free Space</td>
+                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
+                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                </tr>
+                                <!-- ... -->
+                            </tbody>
+                        </table>
+
+
+                        <div style="border: 1.5px solid #000; height: 530px; width: 910px; overflow: auto;">                            
+                            <h5 style="color: #FFF; font-weight: bold; background-color: #808080; text-align: center;">Dr.Koutei Work and Result</h5>
+                            
+                            <div class=" thai-text" style="display: block; height: 480px; /* 18 lines * 18px per line */ overflow: hidden;">
+                                <!-- The content of the report -->
+                                <p style="padding-left: 10px; padding-right: 10px; color: #000;"><span style="color: #000;" t-field="doc.note"/></p>
+                            </div>
+
                         </div>
+
+                        <div style="border: 1.5px solid #000; height: 130px; width: 910px; overflow: auto;">                            
+                            <h5 style="color: #FFF; font-weight: bold; background-color: #808080; text-align: center;">Remark</h5>
+                            
+                            <div class=" thai-text" style="display: block; height: 80px; /* 18 lines * 18px per line */ overflow: hidden;">
+                                <!-- The content of the report -->
+                                <p style="padding-left: 10px; padding-right: 10px; color: #000;"><span style="color: #000;" t-field="doc.name"/></p>
+                            </div>
+
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: top; padding-top: 50px;">
+                            <div class="signature">
+                                <img src="/helpdesk_odoo16/static/image/signature.png" alt="Signature" style="max-height: 120px; padding-left: 10px;"/>
+                            </div>
+                            <div>
+                                <table class="date-info" style="height: 40px; margin-right:25px">
+                                    <!-- Table headers -->
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Status</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-field="doc.name"/></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Charge</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-field="doc.name"/></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </t>
             </t>
