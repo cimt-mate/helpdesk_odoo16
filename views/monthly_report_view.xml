@@ -1,0 +1,65 @@
+<odoo>
+    <!-- Form View for Monthly Report -->
+    <record id="view_monthly_report_form" model="ir.ui.view">
+        <field name="name">monthly.report.form</field>
+        <field name="model">monthly.report</field>
+        <field name="arch" type="xml">
+            <form string="Monthly Report">
+                <header>
+                    <!-- Print button placed in the form view header -->
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="report_date"/>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Monthly Reports -->
+    <record id="view_monthly_reports_tree" model="ir.ui.view">
+        <field name="name">helpdesk.monthly.tree</field>
+        <field name="model">monthly.report</field>
+        <field name="arch" type="xml">
+            <tree string="Helpdesk Monthly">
+                <field name="name"/>
+                <field name="report_date"/>
+                <field name="note"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action to Open the Views -->
+    <record id="action_monthly_reports" model="ir.actions.act_window">
+        <field name="name">Monthly Reports</field>
+        <field name="res_model">monthly.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Report
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item for Monthly Reports -->
+    <menuitem id="menu_monthly_report" name="Monthly"
+        parent="menu_helpdesk"
+        action="action_monthly_reports"
+        sequence="2"/>
+
+    <!-- Report Action -->
+    <record id="action_report_monthly_report" model="ir.actions.report">
+        <field name="name">Helpdesk Monthly Report</field>
+        <field name="model">monthly.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">helpdesk_odoo16.report_monthly_tickets_document</field>
+        <field name="report_file">helpdesk_odoo16.report_monthly_tickets_document</field>
+        <field name="binding_model_id" ref="helpdesk_odoo16.model_monthly_report"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'WorkReport_CIMT_' + (object.display_name.split(',')[-1] 
+            if object.display_name else '').replace('/', '_')</field>
+    </record>
+</odoo>

@@ -1,0 +1,36 @@
+<odoo>
+    <template id="report_monthly_tickets_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <t t-set="css" t-value="'/helpdesk_odoo16/static/src/css/report_style.css'"/>
+                    <div class="page">
+                        <div style="display: flex; justify-content: space-between; align-items: top;">
+                            <div>
+                                <h1>Dr.Koutei Monthly Report</h1>
+                                <h2>Name: <span t-field="doc.name"/></h2>
+                            </div>
+                            <div>
+                                <img src="/helpdesk_odoo16/static/image/CIM-LOGO_ADDRESS.png" alt="Company Logo" style="max-height: 135px;"/>
+                            </div>
+                        </div>
+
+                        <div class="report-container">
+                            <h5>Dr.Koutei Monthly Report</h5>
+                            <div class="report-content">
+                                <p><span t-field="doc.note"/></p>
+                            </div>
+                            <div class="report-date">
+                                <p>Date: <span t-field="doc.report_date"/></p>
+                            </div>
+                        </div>
+
+                        <div class="signature">
+                            <img src="/helpdesk_odoo16/static/image/signature.png" alt="Signature" style="max-height: 130px;"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

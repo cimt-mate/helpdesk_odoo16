@@ -53,6 +53,7 @@
 
         </field>
     </record>
+    
     <menuitem id="menu_helpdesk" name="Helpdesk"
         sequence="10" />
     <menuitem id="menu_helpdesk_ticket" name="Tickets"
@@ -60,7 +61,7 @@
         action="action_helpdesk_ticket"
         sequence="1" />
         
-<record id="action_report_helpdesk_tickets" model="ir.actions.report">
+    <record id="action_report_helpdesk_tickets" model="ir.actions.report">
         <field name="name">Helpdesk Ticket Report</field>
         <field name="model">cimt_helpdesk.ticket</field>
         <field name="report_type">qweb-pdf</field>
@@ -70,9 +71,6 @@
         <field name="binding_type">report</field>
         <field name="print_report_name">'WorkReport_CIMT_' + (object.display_name.split(',')[-1] 
             if object.display_name else '').replace('/', '_')</field>
-
-            
     </record>
-
-        
+     
 </odoo>

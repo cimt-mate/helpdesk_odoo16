@@ -49,6 +49,7 @@ class HelpdeskTicket(models.Model):
         # Example of custom file name: "Helpdesk_Tickets_YYYY-MM-DD"
         report_name = f"Helpdesk_Tickets_{datetime.datetime.now().strftime('%Y-%m-%d')}"
 
+        
         return {
             'type': 'ir.actions.act_url',
             'url': '/report/pdf/helpdesk_odoo16.action_report_helpdesk_tickets/%s?download=true' % ','.join(map(str, active_ids)),
