@@ -14,6 +14,40 @@
                             .thai-text {
                               font-family: 'NotoSansThai', sans-serif;
                             }
+                            .th-default {
+                                color: #000;
+                                padding-left: 10px;
+                                text-align: left;
+                                border: 1px solid black;
+                                background-color: #D3D3D3;
+                                width: 100px;
+                                vertical-align: middle;
+                            }
+                        
+                            .td-left-light {
+                                color: #000;
+                                padding-left: 5px;
+                                text-align: left;
+                                border: 1px solid black;
+                                background-color: #FFF;
+                                vertical-align: middle;
+                            }
+                        
+                            .td-left-dark {
+                                color: #000;
+                                padding-left: 5px;
+                                text-align: left;
+                                border: 1px solid black;
+                                background-color: #D3D3D3;
+                            }
+
+                            .td-right-light {
+                                color: #000;
+                                padding-right: 5px;
+                                text-align: right;
+                                border: 1px solid black;
+                                background-color: #FFF;
+                            }
                           </style>
                         </head>
                     <div class="page">
@@ -75,81 +109,81 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- 1-->
+                                <!-- Row 1 -->
                                 <tr>
-                                    <th style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; padding-left:10px; background-color:#D3D3D3; width:100px;vertical-align: middle; " rowspan="6" colspan="1">Server</th>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;width:120px; vertical-align: middle;" rowspan="2" colspan="1">Drive <span t-field="doc.name"/></td>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:100px;" rowspan="1" colspan="1">Total Size</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2"><span t-field="doc.name"/></td>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:120px; vertical-align: middle;" rowspan="3" colspan="1">Backup Size</td>
-                                    <td style="color: #000; padding-left: 5px; text-align: left;border: 1px solid black; background-color:#FFF;width:80px;" rowspan="1" colspan="1">Data</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right;border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="3"><span t-field="doc.name"/></td>
+                                    <th class="th-default" style="font-weight: bold;" rowspan="6">Server</th>
+                                    <td class="td-left-light" style="width:120px; " rowspan="2">Drive <span t-field="doc.name"/></td>
+                                    <td class="td-left-dark" style="font-weight: bold; width:100px;">Total Size</td>
+                                    <td class="td-right-light" colspan="2"><span t-field="doc.name"/></td>
+                                    <td class="td-left-dark" style="font-weight: bold; width:120px;" rowspan="3">Backup Size</td>
+                                    <td class="td-left-light" style="width:80px;">Data</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="3"><span t-field="doc.name"/></td>
                                 </tr>
-                                <!-- 2-->
+                            
+                                <!-- Row 2 -->
                                 <tr>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:100px;" rowspan="1" colspan="1" >Free Space</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
-                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;width:80px;" rowspan="1" colspan="1">Basic</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2"><span t-field="doc.name"/></td>
+                                    <td class="td-left-dark" style="font-weight: bold;">Free Space</td>
+                                    <td class="td-right-light" colspan="2"><span t-field="doc.name"/></td>
+                                    <td class="td-left-light" style="width:80px;">Basic</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.name"/></td>
                                 </tr>
-                                <!-- 3-->
+                            
+                                <!-- Row 3 -->
                                 <tr>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;width:120px;vertical-align: middle;" rowspan="2" colspan="1" >Drive <span t-field="doc.name"/></td>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:100px;" rowspan="1" colspan="1" >Total Space</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right;border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
-                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;width:80px;" rowspan="1" colspan="1">Evolio</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2"><span t-field="doc.name"/></td>
+                                    <td class="td-left-light" style="width:120px;" rowspan="2">Drive <span t-field="doc.name"/></td>
+                                    <td class="td-left-dark" style="font-weight: bold;">Total Space</td>
+                                    <td class="td-right-light" colspan="2"><span t-field="doc.name"/></td>
+                                    <td class="td-left-light" style="width:80px;">Evolio</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.name"/></td>
                                 </tr>
-                                <!-- 4-->
+                            
+                                <!-- Row 4 -->
                                 <tr>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:100px;" rowspan="1" colspan="1" >Free Space</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right;  border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
-                                    <td style="color: #000; padding-left: 5px; text-align: left;  border: 1px solid black; background-color:#D3D3D3;width:120px;vertical-align: middle;" rowspan="3" colspan="1">Backup Status</td>
-                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="3" colspan="2"><span t-field="doc.name"/></td>
+                                    <td class="td-left-dark" style="font-weight: bold;">Free Space</td>
+                                    <td class="td-right-light" colspan="2"><span t-field="doc.name"/></td>
+                                    <td class="td-left-dark" style="width:120px; font-weight: bold;" rowspan="3">Backup Status</td>
+                                    <td class="td-left-light" style="background-color: #FFF;"  rowspan="3" colspan="2"><span t-field="doc.name"/></td>
                                 </tr>
-                                <!-- 5-->
+                            
+                                <!-- Row 5 -->
                                 <tr>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;width:120px;vertical-align: middle;" rowspan="2" colspan="1" >Drive <span t-field="doc.name"/></td>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:100px;" rowspan="1" colspan="1" >Total Space</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right;border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
-                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                    <td class="td-left-light" style="width:120px;" rowspan="2">Drive <span t-field="doc.name"/></td>
+                                    <td class="td-left-dark" style="font-weight: bold;">Total Space</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.name"/></td>
                                 </tr>
-                                <!-- 6-->
+                                <!-- Row 6 -->
                                 <tr>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:100px;" rowspan="1" colspan="1" >Free Space</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
-                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                    <td class="td-left-dark" style="font-weight: bold;">Free Space</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.name"/></td>
                                 </tr>
-                                <!-- 7-->
+
+                                <!-- Row 7 -->
                                 <tr>
-                                    <th style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; padding-left:10px; background-color:#D3D3D3;width:100px;vertical-align: middle;" rowspan="4" colspan="1">Database</th>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;width:120px;vertical-align: middle;" rowspan="2" colspan="1">Doctor Data</td>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:100px;" rowspan="1" colspan="1">Total Size</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2"><span t-field="doc.name"/></td>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:120px;vertical-align: middle;" rowspan="4" colspan="1">Oracle Logs</td>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;" rowspan="4" colspan="2"><span t-field="doc.name"/></td>
+                                    <th class="th-default" style="font-weight: bold;" rowspan="4">Database</th>
+                                    <td class="td-left-light" style="width:120px;" rowspan="2">Doctor Data</td>
+                                    <td class="td-left-dark" style="font-weight: bold;">Total Size</td>
+                                    <td class="td-right-light" colspan="2"><span t-field="doc.name"/></td>
+                                    <td class="td-left-dark" style="width:120px; font-weight: bold;" rowspan="4">Oracle Logs</td>
+                                    <td class="td-left-light" style="background-color: #FFF;"  rowspan="4" colspan="2"><span t-field="doc.name"/></td>
                                 </tr>
-                                <!-- 8-->
-                                 <tr>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:100px;" rowspan="1" colspan="1" >Free Space</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
-                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
-                                </tr>
-                                <!-- 9-->
-                                 <tr>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#FFF;width:120px; vertical-align: middle;" rowspan="2" colspan="1">Doctor Basic</td>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:100px;" rowspan="1" colspan="1" >Total Size</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
-                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
-                                </tr>
-                                <!-- 10-->
+
+                                <!-- Row 8 -->
                                 <tr>
-                                    <td style="color: #000; padding-left: 5px; text-align: left; border: 1px solid black; background-color:#D3D3D3;width:100px;" rowspan="1" colspan="1" >Free Space</td>
-                                    <td style="color: #000; padding-right: 5px; text-align: right; border: 1px solid black; background-color:#FFF;" rowspan="1" colspan="2" ><span t-field="doc.name"/></td>
-                                    <!-- The next cells span multiple rows for Backup Status and Oracle Logs -->
+                                    <td class="td-left-dark" style="font-weight: bold;">Free Space</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.name"/></td>
+                                </tr>
+
+                                <!-- Row 9 -->
+                                <tr>
+                                    <td class="td-left-light" style="width:120px;" rowspan="2">Doctor Basic</td>
+                                    <td class="td-left-dark" style="font-weight: bold;">Total Size</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.name"/></td>
+                                </tr>
+
+                                <!-- Row 10 -->
+                                <tr>
+                                    <td class="td-left-dark" style="font-weight: bold;">Free Space</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.name"/></td>
                                 </tr>
                                 <!-- ... -->
                             </tbody>
