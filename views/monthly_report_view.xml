@@ -9,11 +9,90 @@
                     <!-- Print button placed in the form view header -->
                 </header>
                 <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="report_date"/>
-                        <field name="note"/>
+                    <group string="User Info">
+                        <group>
+                            <field name="customer_id" widget="many2one" options="{'no_create': True}" />
+                            <field name="location"/>
+                        </group>
+                        <group>
+                            <field name="user_id" widget="many2one" options="{'no_create': True}" />
+                            <!-- <field name="monthly_date"/> -->
+                        </group>
                     </group>
+                    <group string="Date Time Info" col="2">
+                        <group>
+                            <field name="monthly_start_date"/>
+                            <field name="monthly_start_time" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="monthly_end_date"/>
+                            <field name="monthly_end_time" widget="float_time"/>
+                        </group>
+                    </group>
+                    <group string="System Info" col="4">
+                        <group>
+                            <field name="drive_c_free_size"/>
+                            <field name="drive_d_free_size"/>
+                            <field name="drive_special_free_size"/>
+                        </group>
+                        <group>
+                            <field name="drive_c_free_type"/>
+                            <field name="drive_d_free_type"/>
+                            <field name="drive_special_free_type"/>
+                        </group>
+                        <group>
+                            <field name="drive_c_total_size"/>
+                            <field name="drive_d_total_size"/>
+                            <field name="drive_special_total_size"/>
+                        </group>
+                        <group>
+                            <field name="drive_c_total_type"/>
+                            <field name="drive_d_total_type"/>
+                            <field name="drive_special_total_type"/>
+                        </group>
+                    </group>
+                    <group string="Backup Info" col="2">
+                        <group>
+                            <field name="server_backup"/>
+                            <field name="data_size"/>
+                            <field name="basic_size"/>
+                            <field name="evolio_size"/>
+                            <field name="oracle_log"/>  
+                        </group>
+                        <group>
+                            <field name="outside_backup"/>
+                            <field name="data_type"/>
+                            <field name="basic_type"/>
+                            <field name="evolio_type"/>
+                        </group>
+                    </group>
+                    <group string="Doctor Info" col="3">
+                        <group>
+                            <field name="doctor_data_free"/>
+                            <field name="doctor_basic_free"/>
+                        </group>
+                        <group>
+                            <field name="doctor_data_total"/>
+                            <field name="doctor_basic_total"/>
+                        </group>
+                        <group>
+                            <field name="doctor_data_type"/>
+                            <field name="doctor_basic_type"/>
+                        </group>
+                    </group>
+                    <group string="Charge and Results" col="2">
+                        <group>
+                            <field name="charge"/>
+                        </group>
+                        <group>
+                            <field name="complete"/>
+                        </group>
+                    </group>
+                    <group string="Detail">
+                        <field name="work_result"/>
+                        <field name="remark"/>
+                    </group>
+                        <!-- Add other fields here -->
                 </sheet>
             </form>
         </field>
@@ -24,10 +103,45 @@
         <field name="name">helpdesk.monthly.tree</field>
         <field name="model">monthly.report</field>
         <field name="arch" type="xml">
-            <tree string="Helpdesk Monthly">
-                <field name="name"/>
-                <field name="report_date"/>
-                <field name="note"/>
+            <tree string="Monthly Reports">
+                <field name="customer_id"/>
+                <field name="user_id"/>
+                <field name="location"/>
+                <field name="monthly_start_date"/>
+                <field name="monthly_end_date"/>
+                <field name="monthly_start_time"/>
+                <field name="monthly_end_time"/>
+                <field name="drive_c_free_size"/>
+                <field name="drive_c_total_size"/>
+                <field name="drive_c_free_type"/>
+                <field name="drive_c_total_type"/>
+                <field name="drive_d_free_size"/>
+                <field name="drive_d_total_size"/>
+                <field name="drive_d_free_type"/>
+                <field name="drive_d_total_type"/>
+                <field name="drive_special_free_size"/>
+                <field name="drive_special_total_size"/>
+                <field name="drive_special_free_type"/>
+                <field name="drive_special_total_type"/>
+                <field name="server_backup"/>
+                <field name="outside_backup"/>
+                <field name="data_size"/>
+                <field name="data_type"/>
+                <field name="basic_size"/>
+                <field name="basic_type"/>
+                <field name="evolio_size"/>
+                <field name="evolio_type"/>
+                <field name="oracle_log"/>
+                <field name="doctor_data_free"/>
+                <field name="doctor_data_total"/>
+                <field name="doctor_data_type"/>
+                <field name="doctor_basic_free"/>
+                <field name="doctor_basic_total"/>
+                <field name="doctor_basic_type"/>
+                <field name="charge"/>
+                <field name="complete"/>
+                <field name="work_result"/>
+                <field name="remark"/>
             </tree>
         </field>
     </record>
