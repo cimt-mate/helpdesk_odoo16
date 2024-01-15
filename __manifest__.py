@@ -9,6 +9,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/helpdesk_view.xml',
+        'views/monthly_report_view.xml',
     ],
     'demo': [],
     'installable': True,
