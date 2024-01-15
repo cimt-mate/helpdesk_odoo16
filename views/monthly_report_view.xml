@@ -27,21 +27,26 @@
                                 <field name="monthly_end_time" widget="float_time"/>
                             </group>
                         </group>
-                        <group string="System Info" col="3">
+                        <group string="System Info" col="4">
                             <group>
-                                <field name="drive_c_free"/>
-                                <field name="drive_d_free"/>
-                                <field name="drive_special_free"/>
+                                <field name="drive_c_free_size"/>
+                                <field name="drive_d_free_size"/>
+                                <field name="drive_special_free_size"/>
                             </group>
                             <group>
-                                <field name="drive_c_total"/>
-                                <field name="drive_d_total"/>
-                                <field name="drive_special_total"/>
+                                <field name="drive_c_free_type"/>
+                                <field name="drive_d_free_type"/>
+                                <field name="drive_special_free_type"/>
                             </group>
                             <group>
-                                <field name="drive_c_type"/>
-                                <field name="drive_d_type"/>
-                                <field name="drive_special_type"/>
+                                <field name="drive_c_total_size"/>
+                                <field name="drive_d_total_size"/>
+                                <field name="drive_special_total_size"/>
+                            </group>
+                            <group>
+                                <field name="drive_c_total_type"/>
+                                <field name="drive_d_total_type"/>
+                                <field name="drive_special_total_type"/>
                             </group>
                         </group>
                         <group string="Backup Info" col="2">
@@ -104,15 +109,18 @@
                     <field name="monthly_end_date"/>
                     <field name="monthly_start_time"/>
                     <field name="monthly_end_time"/>
-                    <field name="drive_c_free"/>
-                    <field name="drive_c_total"/>
-                    <field name="drive_c_type"/>
-                    <field name="drive_d_free"/>
-                    <field name="drive_d_total"/>
-                    <field name="drive_d_type"/>
-                    <field name="drive_special_free"/>
-                    <field name="drive_special_total"/>
-                    <field name="drive_special_type"/>
+                    <field name="drive_c_free_size"/>
+                    <field name="drive_c_total_size"/>
+                    <field name="drive_c_free_type"/>
+                    <field name="drive_c_total_type"/>
+                    <field name="drive_d_free_size"/>
+                    <field name="drive_d_total_size"/>
+                    <field name="drive_d_free_type"/>
+                    <field name="drive_d_total_type"/>
+                    <field name="drive_special_free_size"/>
+                    <field name="drive_special_total_size"/>
+                    <field name="drive_special_free_type"/>
+                    <field name="drive_special_total_type"/>
                     <field name="server_backup"/>
                     <field name="outside_backup"/>
                     <field name="data_size"/>

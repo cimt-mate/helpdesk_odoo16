@@ -26,9 +26,10 @@ class MonthlyReport(models.Model):
     drive_d_free_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='D Type')
     drive_d_total_size = fields.Float(string='Drive D Total')
     drive_d_total_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='D Type')
-    drive_special_free = fields.Float(string='Drive Special Free')
-    drive_special_total = fields.Float(string='Drive Special Total')
-    drive_special_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='Special Type')
+    drive_special_free_size = fields.Float(string='Drive Special Free')
+    drive_special_free_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='Special Type')
+    drive_special_total_size = fields.Float(string='Drive Special Total')
+    drive_special_total_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='Special Type')
 
     server_backup = fields.Selection([('OK', 'OK'), ('NG', 'NG'), ('NO', 'NO'), ('UNKNOWN', 'UNKNOWN')], string='Backup Type')
     outside_backup = fields.Selection([('OK', 'OK'), ('NG', 'NG'), ('NO', 'NO'), ('UNKNOWN', 'UNKNOWN')], string='Outside Backup Type')
