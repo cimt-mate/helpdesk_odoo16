@@ -119,4 +119,3 @@ class MonthlyReport(models.Model):
         # Generate the report for the entire recordset
         return self.env.ref('monthly.action_report_monthly_report').report_action(record_ids)
     
-
