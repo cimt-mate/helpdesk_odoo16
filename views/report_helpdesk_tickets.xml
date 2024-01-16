@@ -1,0 +1,67 @@
+<odoo>
+    <template id="report_helpdesk_tickets_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <head>
+                    <style>
+                        @font-face {
+                          font-family: 'NotoSansThai';
+                          src: url('/helpdesk_odoo16/static/font/NotoSansThaiUIRegular.ttf') format('truetype');
+                          font-weight: normal;
+                          font-style: normal;
+                        }
+                        .thai-text {
+                          font-family: 'NotoSansThai', sans-serif;
+                        }
+                      </style>
+                    </head>
+                    <div class="page">
+                        <div style="display: flex; justify-content: space-between; align-items: top;">
+                            <div>
+                                <h1 style="padding-left: 10px; color: #000; padding-top: 10px; font-weight: bold;">Dr.Koutei Work Report</h1>
+                                <h2 style="padding-left: 10px; color: #000; font-weight: bold;">Customer: <span style="color: #000;" t-field="doc.customer_nickname"/></h2>
+                                <!-- <p><strong>Contact Name:</strong> <span t-field="doc.worker_name"/></p> -->
+
+                            </div>
+                            <div style="text-align:right; padding-bottom:10px; margin-right:10px;">
+                                <!-- Company Logo -->
+                                <img t-if="doc.company_id.logo"
+                                    t-att-src="'data:image/png;base64,%s' % doc.company_id.logo.decode()"
+                                    style="max-height: 45px;" />
+                                <br />
+                                <!-- Company Address -->
+                                <div>
+                                    <span style="font-size:14px; font-weight: bold;"
+                                        t-field="doc.company_id.partner_id.street" />
+                                        <br />
+                                    <span style="font-size:14px; font-weight: bold;"
+                                        t-esc="'%s %s' % (doc.company_id.partner_id.street2, doc.company_id.partner_id.country_id.name)" />
+                                        <br />
+                                    <span style="font-size:14px; font-weight: bold;"
+                                        t-esc="'TEL %s FAX %s' % (doc.company_id.partner_id.phone, doc.company_id.partner_id.fax)" />
+                                </div>
+                            </div>     
+                        </div>
+
+                        <div style="border: 1.5px solid #000; height: 1030px; width: 920px; margin: auto; overflow: auto;">
+                            <h5 style="color: #FFF; font-weight: bold; background-color: #808080; text-align: center;">Dr.Koutei Work Report</h5>
+
+                            <div class=" thai-text" style="display: block; height: 930px; /* 18 lines * 18px per line */ overflow: hidden;">
+                                <!-- The content of the report -->
+                                <p style="padding-left: 10px; padding-right: 10px; color: #000;"><span style="color: #000;" t-field="doc.ticket_detail"/></p>
+                            </div>
+                            <div style="padding-top: 20px; color: #000;">
+                                <p style="padding-left: 30px;">Date: <span t-field="doc.ticket_date"/> User: <span t-field="doc.worker_name"/> CIM: <span t-field="doc.user_id.name"/></p>
+                            </div>
+                        </div>
+
+                        <div style="solid #000; padding-top: 40px; padding-left: 10px;">
+                            <img src="/helpdesk_odoo16/static/image/signature.png" style="max-height: 130px;"/>
+                        </div>
+                        </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

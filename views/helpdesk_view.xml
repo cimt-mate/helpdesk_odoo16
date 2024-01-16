@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <odoo>
     <!-- Define the form list -->
     <record id="view_helpdesk_ticket_form" model="ir.ui.view">
@@ -73,4 +74,81 @@
         parent="menu_helpdesk"
         action="action_helpdesk_ticket"
         sequence="1" />
+=======
+<odoo>
+    <record id="view_helpdesk_ticket_form" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form</field>
+        <field name="model">cimt_helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <form string="Helpdesk Ticket">
+                <sheet>
+                    <group>
+                        <field name="customer_id" widget="many2one"
+                            options="{'no_create':
+                        True}" />
+                        <field name="user_name" />
+                        <field name="ticket_date" />
+                        <field name="worker_name" />
+                        <field name="ticket_minutes" />
+                    </group>
+                    <group>
+                        <field name="ticket_detail" widget="text" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_helpdesk_ticket" model="ir.actions.act_window">
+        <field name="name">Tickets</field>
+        <field name="res_model">cimt_helpdesk.ticket</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new ticket
+            </p>
+        </field>
+    </record>
+    <record id="view_helpdesk_ticket_tree" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.tree</field>
+        <field name="model">cimt_helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <tree string="Helpdesk Ticket">
+                <field name="ticket_detail" />
+                <field name="customer_id" />
+                <field name="ticket_date" />
+                <field name="worker_name" />
+                <field name="ticket_minutes" />
+                <field name="user_name" />
+
+            </tree>
+           <header>
+                <!-- Your new print button -->
+                <button string="Print Tickets" type="object" name="action_print_tickets"
+                    class="oe_highlight" />
+                <!-- Other buttons like 'Create' or 'Import' would also be defined here -->
+            </header>
+
+        </field>
+    </record>
+    
+    <menuitem id="menu_helpdesk" name="Helpdesk"
+        sequence="10" />
+    <menuitem id="menu_helpdesk_ticket" name="Tickets"
+        parent="menu_helpdesk"
+        action="action_helpdesk_ticket"
+        sequence="1" />
+        
+    <record id="action_report_helpdesk_tickets" model="ir.actions.report">
+        <field name="name">Helpdesk Ticket Report</field>
+        <field name="model">cimt_helpdesk.ticket</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">helpdesk_odoo16.report_helpdesk_tickets_document</field>
+        <field name="report_file">helpdesk_odoo16.report_helpdesk_tickets_document</field>
+        <field name="binding_model_id" ref="helpdesk_odoo16.model_cimt_helpdesk_ticket" />
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'WorkReport_CIMT_' + (object.display_name.split(',')[-1] 
+            if object.display_name else '').replace('/', '_')</field>
+    </record>
+     
+>>>>>>> north
 </odoo>
