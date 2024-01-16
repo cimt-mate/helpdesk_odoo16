@@ -20,14 +20,28 @@
                         <div style="display: flex; justify-content: space-between; align-items: top;">
                             <div>
                                 <h1 style="padding-left: 10px; color: #000; padding-top: 10px; font-weight: bold;">Dr.Koutei Work Report</h1>
-                                <h2 style="padding-left: 10px; color: #000; font-weight: bold;">Customer: <span style="color: #000;" t-field="doc.customer_id.name"/></h2>
+                                <h2 style="padding-left: 10px; color: #000; font-weight: bold;">Customer: <span style="color: #000;" t-field="doc.customer_nickname"/></h2>
                                 <!-- <p><strong>Contact Name:</strong> <span t-field="doc.worker_name"/></p> -->
 
                             </div>
-                            <div>
-                                <!-- Here is where we add the image -->
-                                <img src="/helpdesk_odoo16/static/image/CIM-LOGO_ADDRESS.png" style="max-height: 135px;"/>
-                            </div>
+                            <div style="text-align:right; padding-bottom:10px; margin-right:10px;">
+                                <!-- Company Logo -->
+                                <img t-if="doc.company_id.logo"
+                                    t-att-src="'data:image/png;base64,%s' % doc.company_id.logo.decode()"
+                                    style="max-height: 45px;" />
+                                <br />
+                                <!-- Company Address -->
+                                <div>
+                                    <span style="font-size:14px; font-weight: bold;"
+                                        t-field="doc.company_id.partner_id.street" />
+                                        <br />
+                                    <span style="font-size:14px; font-weight: bold;"
+                                        t-esc="'%s %s' % (doc.company_id.partner_id.street2, doc.company_id.partner_id.country_id.name)" />
+                                        <br />
+                                    <span style="font-size:14px; font-weight: bold;"
+                                        t-esc="'TEL %s FAX %s' % (doc.company_id.partner_id.phone, doc.company_id.partner_id.fax)" />
+                                </div>
+                            </div>     
                         </div>
 
                         <div style="border: 1.5px solid #000; height: 1030px; width: 920px; margin: auto; overflow: auto;">

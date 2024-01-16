@@ -56,18 +56,34 @@
                                 <h1 style="padding-left: 10px; color: #000; padding-top: 10px; font-weight: bold;">Dr.Koutei :</h1>
                                 <h1 style="padding-left: 10px; color: #000; font-weight: bold;">Maintenance Report </h1>
                                 <!-- <p><strong>Contact Name:</strong> <span t-field="doc.worker_name"/></p> -->
-
                             </div>
                             <div>
-                                <!-- Here is where we add the image -->
-                                <img src="/helpdesk_odoo16/static/image/CIM-LOGO_ADDRESS.png" style="max-height: 135px; margin-right:20px"/>
+                                    <!-- Custom header area -->
+                                    <div style="text-align:right; padding-bottom:10px; margin-right:25px;">
+                                        <!-- Company Logo -->
+                                        <img t-if="doc.company_id.logo"
+                                            t-att-src="'data:image/png;base64,%s' % doc.company_id.logo.decode()"
+                                            style="max-height: 45px;" />
+                                        <br />
+                                        <!-- Company Address -->
+                                        <div>
+                                            <span style="font-size:14px; font-weight: bold;"
+                                                t-field="doc.company_id.partner_id.street" />
+                                                <br />
+                                            <span style="font-size:14px; font-weight: bold;"
+                                                t-esc="'%s %s' % (doc.company_id.partner_id.street2, doc.company_id.partner_id.country_id.name)" />
+                                                <br />
+                                            <span style="font-size:14px; font-weight: bold;"
+                                                t-esc="'TEL %s FAX %s' % (doc.company_id.partner_id.phone, doc.company_id.partner_id.fax)" />
+                                        </div>
+                                    </div>        
                             </div>
                         </div>
 
                         <div style="display: flex; justify-content: space-between; align-items: top; padding-bottom: 10px;">
                             <div style="padding-top: 40px; padding-left:10px; ">
-                                <h4 style="padding-bottom:5px; border-bottom: 2px solid #000; width: 350px; height: 30px;"><a style=" color: #000; font-weight: bold;">Customer : </a> <span style="font-size:16px; color: #000; " t-field="doc.customer_id"/></h4>
-                                <h4 style="padding-bottom:5px; border-bottom: 2px solid #000; width: 350px; height: 30px;"><a style=" color: #000; font-weight: bold;">Location  : </a> <span style="font-size:16px; color: #000; " t-field="doc.location"/></h4>
+                                <h4 style="padding-bottom:5px; border-bottom: 2px solid #000; width: 350px; height: 30px;"><a style=" color: #000; font-weight: bold;">Customer : </a> <span style="font-size:20px; color: #000; " t-field="doc.customer_nickname"/></h4>
+                                <h4 style="padding-bottom:5px; border-bottom: 2px solid #000; width: 350px; height: 30px;"><a style=" color: #000; font-weight: bold;">Location  : </a> <span style="font-size:16px; color: #000; " t-field="doc.truncated_location"/></h4>
                             </div>
                             <div>
                                 <table class="date-info" style="height: 100px; margin-right:25px">

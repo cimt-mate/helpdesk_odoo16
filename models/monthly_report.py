@@ -12,6 +12,17 @@ class MonthlyReport(models.Model):
         domain=[('is_customer', '=', True)], 
         required=True,
     )
+
+    customer_nickname = fields.Char(
+        string='Nickname', 
+        related='customer_id.nickname',
+        readonly=True,
+        store=True,  # Set to True if you need to store it in the database, otherwise you can omit this or set it to False
+        help="Displays the nickname of the selected customer."
+    )
+    company_id = fields.Many2one('res.company', string='Company', 
+        default=lambda self: self.env.company)
+
     user_id = fields.Many2one('res.users', string='Worker', default=lambda self: self.env.user, readonly=True)
     location = fields.Char(string='Location')
     monthly_start_date = fields.Date(string='Monthly Start Date', required=True, default=fields.Date.context_today)
@@ -59,6 +70,29 @@ class MonthlyReport(models.Model):
     work_result = fields.Text(string='Work Result')
     remark = fields.Text(string='Remark')
 
+    truncated_customer_id = fields.Char(compute='_compute_truncated_fields')
+    truncated_location = fields.Char(compute='_compute_truncated_fields')
+
+    @api.depends('customer_id', 'location')
+    def _compute_truncated_fields(self):
+        max_length = 23
+        for record in self:
+            # Truncate customer_id
+            if record.customer_id and len(record.customer_id.name) > max_length:
+                record.truncated_customer_id = record.customer_id.name[:max_length] + '...'
+            else:
+                record.truncated_customer_id = record.customer_id.name if record.customer_id else ''
+
+            # Truncate location
+            if record.location and len(record.location) > max_length:
+                record.truncated_location = record.location[:max_length] + '...'
+            else:
+                record.truncated_location = record.location
+
+    @api.onchange('monthly_start_date')
+    def _onchange_monthly_start_date(self):
+        self.monthly_end_date = self.monthly_start_date
+
 
     @api.depends('monthly_start_time', 'monthly_end_time')
     def _compute_time_difference(self):
@@ -84,3 +118,5 @@ class MonthlyReport(models.Model):
 
         # Generate the report for the entire recordset
         return self.env.ref('monthly.action_report_monthly_report').report_action(record_ids)
+    
+

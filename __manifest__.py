@@ -5,7 +5,7 @@
     'sequence': 10,
     'description': """Custom Helpdesk Module For CIMT""",
     'category': 'Productivity',
-    'depends': ['base'],
+    'depends': ['base', 'cimt_odoo16'],
     'data': [
         'security/ir.model.access.csv',
         'views/helpdesk_view.xml',

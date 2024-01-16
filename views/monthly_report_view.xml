@@ -3,6 +3,7 @@
     <record id="view_monthly_report_form" model="ir.ui.view">
         <field name="name">monthly.report.form</field>
         <field name="model">monthly.report</field>
+
         <field name="arch" type="xml">
             <form string="Monthly Report">
                 <header>
@@ -12,6 +13,7 @@
                     <group string="User Info">
                         <group>
                             <field name="customer_id" widget="many2one" options="{'no_create': True}" />
+                            <field name="customer_nickname" readonly="1"/> <!-- Add this line -->
                             <field name="location"/>
                         </group>
                         <group>
@@ -105,6 +107,7 @@
         <field name="arch" type="xml">
             <tree string="Monthly Reports">
                 <field name="customer_id"/>
+                <field name="customer_nickname"/>
                 <field name="user_id"/>
                 <field name="location"/>
                 <field name="monthly_start_date"/>
@@ -142,6 +145,7 @@
                 <field name="complete"/>
                 <field name="work_result"/>
                 <field name="remark"/>
+                
             </tree>
         </field>
     </record>

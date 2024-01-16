@@ -22,6 +22,13 @@ class HelpdeskTicket(models.Model):
         string='User Name', 
         default=lambda self: self._default_user_name()
     )
+    customer_nickname = fields.Char(
+        string='Nickname', 
+        related='customer_id.nickname',
+        readonly=True,
+        store=True,  # Set to True if you need to store it in the database, otherwise you can omit this or set it to False
+        help="Displays the nickname of the selected customer."
+    )
     
     ticket_date = fields.Date(
         'Ticker Date', 
@@ -31,6 +38,8 @@ class HelpdeskTicket(models.Model):
     worker_name = fields.Char(string='Contact Name')
     ticket_minutes = fields.Integer('Ticket Minutes')
     ticket_detail = fields.Text('Ticket Detail')
+    company_id = fields.Many2one('res.company', string='Company', 
+        default=lambda self: self.env.company)
     
     @api.model
     def _default_user_name(self):
