@@ -26,10 +26,11 @@ class MonthlyReport(models.Model):
     drive_d_free_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='D Type')
     drive_d_total_size = fields.Float(string='Drive D Total')
     drive_d_total_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='D Type')
-    drive_special_free_size = fields.Float(string='Drive Special Free')
-    drive_special_free_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='Special Type')
-    drive_special_total_size = fields.Float(string='Drive Special Total')
-    drive_special_total_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='Special Type')
+    drive_special_name = fields.Char(string='Drive Special Name', size=1)
+    drive_special_free_size = fields.Float(string='Free')
+    drive_special_free_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='Type')
+    drive_special_total_size = fields.Float(string='Total')
+    drive_special_total_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='Type')
 
     server_backup = fields.Selection([('OK', 'OK'), ('NG', 'NG'), ('NO', 'NO'), ('UNKNOWN', 'UNKNOWN')], string='Backup Type')
     outside_backup = fields.Selection([('OK', 'OK'), ('NG', 'NG'), ('NO', 'NO'), ('UNKNOWN', 'UNKNOWN')], string='Outside Backup Type')
@@ -60,3 +61,15 @@ class MonthlyReport(models.Model):
     @api.onchange('monthly_start_date')
     def _onchange_monthly_start_date(self):
         self.monthly_end_date = self.monthly_start_date
+        
+    @api.onchange('drive_c_free_type')
+    def _onchange_drive_c_free_type(self):
+        self.drive_c_total_type = self.drive_c_free_type
+        
+    @api.onchange('drive_d_free_type')
+    def _onchange_drive_d_free_type(self):
+        self.drive_d_total_type = self.drive_d_free_type
+        
+    @api.onchange('drive_special_free_type')
+    def _onchange_drive_special_free_type(self):
+        self.drive_special_total_type = self.drive_special_free_type

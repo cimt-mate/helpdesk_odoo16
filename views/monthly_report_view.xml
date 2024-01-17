@@ -31,24 +31,38 @@
                             <group>
                                 <field name="drive_c_free_size"/>
                                 <field name="drive_d_free_size"/>
-                                <field name="drive_special_free_size"/>
                             </group>
                             <group>
                                 <field name="drive_c_free_type"/>
                                 <field name="drive_d_free_type"/>
-                                <field name="drive_special_free_type"/>
                             </group>
                             <group>
                                 <field name="drive_c_total_size"/>
                                 <field name="drive_d_total_size"/>
-                                <field name="drive_special_total_size"/>
                             </group>
                             <group>
                                 <field name="drive_c_total_type"/>
                                 <field name="drive_d_total_type"/>
+                            </group>
+                        </group>
+                        <group col="5">
+                            <group>
+                                <field name="drive_special_name"/>
+                            </group>
+                            <group>
+                                <field name="drive_special_free_size"/>
+                            </group>
+                            <group>
+                                <field name="drive_special_free_type"/>
+                            </group>
+                            <group>
+                                <field name="drive_special_total_size"/>
+                            </group>
+                            <group>
                                 <field name="drive_special_total_type"/>
                             </group>
                         </group>
+
                         <group string="Backup Info" col="2">
                             <group>
                                 <field name="server_backup"/>
@@ -117,6 +131,7 @@
                     <field name="drive_d_total_size"/>
                     <field name="drive_d_free_type"/>
                     <field name="drive_d_total_type"/>
+                    <field name="drive_special_name"/>
                     <field name="drive_special_free_size"/>
                     <field name="drive_special_total_size"/>
                     <field name="drive_special_free_type"/>
