@@ -52,7 +52,7 @@
                                 <p style="padding-left: 10px; padding-right: 10px; color: #000;"><span style="color: #000;" t-field="doc.ticket_detail"/></p>
                             </div>
                             <div style="padding-top: 20px; color: #000;">
-                                <p style="padding-left: 30px;">Date: <span t-field="doc.ticket_date"/> User: <span t-field="doc.worker_name"/> CIM: <span t-field="doc.user_id.name"/></p>
+                                <p style="padding-left: 30px;">Date: <span t-field="doc.ticket_date"/> User: <span t-field="doc.worker_name"/> CIM: <span t-field="doc.user_name"/></p>
                             </div>
                         </div>
 
