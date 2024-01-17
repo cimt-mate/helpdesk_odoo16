@@ -9,7 +9,7 @@ class MonthlyReport(models.Model):
     customer_id = fields.Many2one(
         'res.partner', 
         string='Customer', 
-        domain=[('is_customer', '=', True)], 
+        domain=[('is_client', '=', True)], 
         required=True,
     )
 
