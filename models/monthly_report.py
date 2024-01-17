@@ -1,4 +1,6 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
+from datetime import datetime
 
 class MonthlyReport(models.Model):
     _name = 'monthly.report'
@@ -7,15 +9,28 @@ class MonthlyReport(models.Model):
     customer_id = fields.Many2one(
         'res.partner', 
         string='Customer', 
-        domain=[('is_customer', '=', True)], 
+        domain=[('is_client', '=', True)], 
         required=True,
     )
+
+    customer_nickname = fields.Char(
+        string='Nickname', 
+        related='customer_id.nickname',
+        readonly=True,
+        store=True,  # Set to True if you need to store it in the database, otherwise you can omit this or set it to False
+        help="Displays the nickname of the selected customer."
+    )
+    company_id = fields.Many2one('res.company', string='Company', 
+        default=lambda self: self.env.company)
+
     user_id = fields.Many2one('res.users', string='Worker', default=lambda self: self.env.user, readonly=True)
     location = fields.Char(string='Location')
     monthly_start_date = fields.Date(string='Monthly Start Date', required=True, default=fields.Date.context_today)
     monthly_end_date = fields.Date(string='Monthly End Date', required=True)
     monthly_start_time = fields.Float(string='Start time')
     monthly_end_time = fields.Float(string='End time')
+    time_difference = fields.Float(string='Time Difference', compute='_compute_time_difference', store=True)
+
 
     # monthly_end = fields.Datetime(string='Monthly End Date', required=True, default=fields.Date.context_today) 
     drive_c_free_size = fields.Float(string='Drive C Free')
@@ -55,13 +70,30 @@ class MonthlyReport(models.Model):
     
     work_result = fields.Text(string='Work Result')
     remark = fields.Text(string='Remark')
-    
-    
-    
+
+    truncated_customer_id = fields.Char(compute='_compute_truncated_fields')
+    truncated_location = fields.Char(compute='_compute_truncated_fields')
+
+    @api.depends('customer_id', 'location')
+    def _compute_truncated_fields(self):
+        max_length = 23
+        for record in self:
+            # Truncate customer_id
+            if record.customer_id and len(record.customer_id.name) > max_length:
+                record.truncated_customer_id = record.customer_id.name[:max_length] + '...'
+            else:
+                record.truncated_customer_id = record.customer_id.name if record.customer_id else ''
+
+            # Truncate location
+            if record.location and len(record.location) > max_length:
+                record.truncated_location = record.location[:max_length] + '...'
+            else:
+                record.truncated_location = record.location
+
     @api.onchange('monthly_start_date')
     def _onchange_monthly_start_date(self):
         self.monthly_end_date = self.monthly_start_date
-        
+       
     @api.onchange('drive_c_free_type')
     def _onchange_drive_c_free_type(self):
         self.drive_c_total_type = self.drive_c_free_type
@@ -73,3 +105,29 @@ class MonthlyReport(models.Model):
     @api.onchange('drive_special_free_type')
     def _onchange_drive_special_free_type(self):
         self.drive_special_total_type = self.drive_special_free_type
+
+
+    @api.depends('monthly_start_time', 'monthly_end_time')
+    def _compute_time_difference(self):
+        for record in self:
+            if record.monthly_start_time and record.monthly_end_time:
+                # Calculate the time difference in hours
+                record.time_difference = record.monthly_end_time - record.monthly_start_time
+            else:
+                record.time_difference = 0.0
+
+    @api.model
+    def _default_user_name(self):
+        # Return the current user's login name
+        return self.env.user.name
+
+
+    def action_print_report(self):
+        if not self:
+            raise UserError("No records selected for printing.")
+
+        # Collect the IDs of all selected records
+        record_ids = self.ids
+
+        # Generate the report for the entire recordset
+        return self.env.ref('monthly.action_report_monthly_report').report_action(record_ids)

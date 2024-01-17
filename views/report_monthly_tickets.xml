@@ -1,0 +1,271 @@
+<odoo>
+    <template id="report_monthly_tickets_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <head>
+                        <style>
+                            @font-face {
+                              font-family: 'NotoSansThai';
+                              src: url('/helpdesk_odoo16/static/font/NotoSansThaiUIRegular.ttf') format('truetype');
+                              font-weight: normal;
+                              font-style: normal;
+                            }
+                            .thai-text {
+                              font-family: 'NotoSansThai', sans-serif;
+                            }
+                            .th-default {
+                                color: #000;
+                                padding-left: 10px;
+                                text-align: left;
+                                border: 1px solid black;
+                                background-color: #D3D3D3;
+                                width: 100px;
+                                vertical-align: middle;
+                            }
+                        
+                            .td-left-light {
+                                color: #000;
+                                padding-left: 5px;
+                                text-align: left;
+                                border: 1px solid black;
+                                background-color: #FFF;
+                                vertical-align: middle;
+                            }
+                        
+                            .td-left-dark {
+                                color: #000;
+                                padding-left: 5px;
+                                text-align: left;
+                                border: 1px solid black;
+                                background-color: #D3D3D3;
+                            }
+
+                            .td-right-light {
+                                color: #000;
+                                padding-right: 5px;
+                                text-align: right;
+                                border: 1px solid black;
+                                background-color: #FFF;
+                            }
+                          </style>
+                        </head>
+                    <div class="page">
+                        <div style="display: flex; justify-content: space-between; align-items: top;">
+                            <div>
+                                <h1 style="padding-left: 10px; color: #000; padding-top: 10px; font-weight: bold;">Dr.Koutei :</h1>
+                                <h1 style="padding-left: 10px; color: #000; font-weight: bold;">Maintenance Report </h1>
+                                <!-- <p><strong>Contact Name:</strong> <span t-field="doc.worker_name"/></p> -->
+                            </div>
+                            <div>
+                                    <!-- Custom header area -->
+                                    <div style="text-align:right; padding-bottom:10px; margin-right:25px;">
+                                        <!-- Company Logo -->
+                                        <img t-if="doc.company_id.logo"
+                                            t-att-src="'data:image/png;base64,%s' % doc.company_id.logo.decode()"
+                                            style="max-height: 45px;" />
+                                        <br />
+                                        <!-- Company Address -->
+                                        <div>
+                                            <span style="font-size:14px; font-weight: bold;"
+                                                t-field="doc.company_id.partner_id.street" />
+                                                <br />
+                                            <span style="font-size:14px; font-weight: bold;"
+                                                t-esc="'%s %s' % (doc.company_id.partner_id.street2, doc.company_id.partner_id.country_id.name)" />
+                                                <br />
+                                            <span style="font-size:14px; font-weight: bold;"
+                                                t-esc="'TEL %s FAX %s' % (doc.company_id.partner_id.phone, doc.company_id.partner_id.fax)" />
+                                        </div>
+                                    </div>        
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: top; padding-bottom: 10px;">
+                            <div style="padding-top: 40px; padding-left:10px; ">
+                                <h4 style="padding-bottom:5px; border-bottom: 2px solid #000; width: 350px; height: 30px;"><a style=" color: #000; font-weight: bold;">Customer : </a> <span style="font-size:20px; color: #000; " t-field="doc.customer_nickname"/></h4>
+                                <h4 style="padding-bottom:5px; border-bottom: 2px solid #000; width: 350px; height: 30px;"><a style=" color: #000; font-weight: bold;">Location  : </a> <span style="font-size:16px; color: #000; " t-field="doc.truncated_location"/></h4>
+                            </div>
+                            <div>
+                                <table class="date-info" style="height: 100px; margin-right:25px">
+                                    <!-- Table headers -->
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Date</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-field="doc.monthly_start_date"/></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Start Time</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-esc="'%d:%.2d' % (int(doc.monthly_start_time), (doc.monthly_start_time - int(doc.monthly_start_time)) * 60)" />
+                                        </th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">End Time</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-esc="'%d:%.2d' % (int(doc.monthly_end_time), (doc.monthly_end_time - int(doc.monthly_end_time)) * 60)" /></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Work Hours</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;">
+                                            <span t-esc="int((doc.monthly_end_time - doc.monthly_start_time) * 60)" /> Minutes
+                                            </th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Operator</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;"><span t-field="doc.user_id"/></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <table style="width: 910px; border-collapse: collapse; border: 1px solid black; text-align: left;">
+                            <thead>
+                                <tr>
+                                    <th style="color: #FFF; font-weight: bold; background-color: #808080; border: 2px solid black; text-align: center;" colspan="12">Server Information</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Row 1 -->
+                                <tr>
+                                    <th class="th-default" style="font-weight: bold;" rowspan="6">Server</th>
+                                    <td class="td-left-light" style="width:120px; " rowspan="2">Drive D</td>
+                                    <td class="td-left-dark" style="font-weight: bold; width:100px;">Total Size</td>
+                                    <td class="td-right-light" colspan="2"><span t-field="doc.drive_c_total_size"/> <span t-field="doc.drive_c_total_type"/></td>
+                                    <td class="td-left-dark" style="font-weight: bold; width:120px;" rowspan="3">Backup Size</td>
+                                    <td class="td-left-light" style="width:80px;">Data</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="3"><span t-field="doc.data_size"/> <span t-field="doc.data_type"/></td>
+                                </tr>
+                            
+                                <!-- Row 2 -->
+                                <tr>
+                                    <td class="td-left-dark" style="font-weight: bold;">Free Space</td>
+                                    <td class="td-right-light" colspan="2"><span t-field="doc.drive_c_free_size"/> <span t-field="doc.drive_c_free_type"/></td>
+                                    <td class="td-left-light" style="width:80px;">Basic</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.basic_size"/> <span t-field="doc.basic_type"/></td>
+                                </tr>
+                            
+                                <!-- Row 3 -->
+                                <tr>
+                                    <td class="td-left-light" style="width:120px;" rowspan="2">Drive D</td>
+                                    <td class="td-left-dark" style="font-weight: bold;">Total Space</td>
+                                    <td class="td-right-light" colspan="2"><span t-field="doc.drive_d_total_size"/> <span t-field="doc.drive_d_total_type"/></td>
+                                    <td class="td-left-light" style="width:80px;">Evolio</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.evolio_size"/> <span t-field="doc.evolio_type"/></td>
+                                </tr>
+                            
+                                <!-- Row 4 -->
+                                <tr>
+                                    <td class="td-left-dark" style="font-weight: bold;">Free Space</td>
+                                    <td class="td-right-light" colspan="2"><span t-field="doc.drive_d_free_size"/> <span t-field="doc.drive_d_free_type"/></td>
+                                    <td class="td-left-dark" style="width:120px; font-weight: bold;" rowspan="3">Backup Status</td>
+                                    <td class="td-left-light" style="background-color: #FFF;"  rowspan="3" colspan="2">[<span t-field="doc.server_backup"/>] : [<span t-field="doc.outside_backup"/>]</td>
+                                </tr>
+                            
+                                <!-- Row 5 -->
+                                <tr>
+                                    <td class="td-left-light" style="width:120px;" rowspan="2">Drive Special</td>
+                                    <td class="td-left-dark" style="font-weight: bold;">Total Space</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.drive_special_total_size"/> <span t-field="doc.drive_special_total_type"/></td>
+                                </tr>
+                                <!-- Row 6 -->
+                                <tr>
+                                    <td class="td-left-dark" style="font-weight: bold;">Free Space</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.drive_special_free_size"/> <span t-field="doc.drive_special_free_type"/></td>
+                                </tr>
+
+                                <!-- Row 7 -->
+                                <tr>
+                                    <th class="th-default" style="font-weight: bold;" rowspan="4">Database</th>
+                                    <td class="td-left-light" style="width:120px;" rowspan="2">Doctor Data</td>
+                                    <td class="td-left-dark" style="font-weight: bold;">Total Size</td>
+                                    <td class="td-right-light" colspan="2"><span t-field="doc.doctor_data_total"/> <span t-field="doc.doctor_data_type"/></td>
+                                    <td class="td-left-dark" style="width:120px; font-weight: bold;" rowspan="4">Oracle Logs</td>
+                                    <td class="td-left-light" style="background-color: #FFF;"  rowspan="4" colspan="2"><span t-field="doc.oracle_log"/></td>
+                                </tr>
+
+                                <!-- Row 8 -->
+                                <tr>
+                                    <td class="td-left-dark" style="font-weight: bold;">Free Space</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.doctor_data_free"/> <span t-field="doc.doctor_data_type"/></td>
+                                </tr>
+
+                                <!-- Row 9 -->
+                                <tr>
+                                    <td class="td-left-light" style="width:120px;" rowspan="2">Doctor Basic</td>
+                                    <td class="td-left-dark" style="font-weight: bold;">Total Size</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.doctor_basic_total"/> <span t-field="doc.doctor_basic_type"/></td>
+                                </tr>
+
+                                <!-- Row 10 -->
+                                <tr>
+                                    <td class="td-left-dark" style="font-weight: bold;">Free Space</td>
+                                    <td class="td-right-light" style="background-color: #FFF;"  colspan="2"><span t-field="doc.doctor_basic_free"/> <span t-field="doc.doctor_basic_type"/></td>
+                                </tr>
+                                <!-- ... -->
+                            </tbody>
+                        </table>
+
+
+                        <div style="border: 1.5px solid #000; height: 530px; width: 910px; overflow: auto;">                            
+                            <h5 style="color: #FFF; font-weight: bold; background-color: #808080; text-align: center;">Dr.Koutei Work and Result</h5>
+                            
+                            <div class=" thai-text" style="display: block; height: 480px; /* 18 lines * 18px per line */ overflow: hidden;">
+                                <!-- The content of the report -->
+                                <p style="padding-left: 10px; padding-right: 10px; color: #000;"><span style="color: #000;" t-field="doc.work_result"/></p>
+                            </div>
+
+                        </div>
+
+                        <div style="border: 1.5px solid #000; height: 130px; width: 910px; overflow: auto;">                            
+                            <h5 style="color: #FFF; font-weight: bold; background-color: #808080; text-align: center;">Remark</h5>
+                            
+                            <div class=" thai-text" style="display: block; height: 80px; /* 18 lines * 18px per line */ overflow: hidden;">
+                                <!-- The content of the report -->
+                                <p style="padding-left: 10px; padding-right: 10px; color: #000;"><span style="color: #000;" t-field="doc.remark"/></p>
+                            </div>
+
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: top; padding-top: 50px;">
+                            <div class="signature">
+                                <img src="/helpdesk_odoo16/static/image/signature.png" alt="Signature" style="max-height: 120px; padding-left: 10px;"/>
+                            </div>
+                            <div>
+                                <table class="date-info" style="height: 40px; margin-right:25px">
+                                    <!-- Table headers -->
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Status</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;">
+                                        <span t-if="doc.complete">
+                                            COMPLETED
+                                        </span>
+                                        <span t-else="1">
+                                            NO
+                                        </span>
+                                        </th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                    <tr style="border: 2px; solid #000;height: 20px;">
+                                        <th style="padding-left: 5px; width: 150px; font-size: 16px; border: 2px solid #000; color: #000; font-weight: bold; background-color: #D3D3D3; ">Charge</th>
+                                        <th style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;">
+                                        <span t-if="doc.charge">
+                                            COMPLETED
+                                        </span>
+                                        <span t-else="1">
+                                            NO
+                                        </span></th>
+                                        <!-- Add more headers as needed -->
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
