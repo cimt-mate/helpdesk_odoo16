@@ -1,6 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 from datetime import datetime
+from odoo.tools.translate import _
+
 
 class MonthlyReport(models.Model):
     _name = 'monthly.report'
@@ -138,3 +140,64 @@ class MonthlyReport(models.Model):
     @api.onchange('drive_special_free_type')
     def _onchange_drive_special_free_type(self):
         self.drive_special_total_type = self.drive_special_free_type
+
+
+    def action_duplicate_recordd(self):
+        self.ensure_one()
+        # Define the fields you want to copy and their values
+        default_vals = {
+            'customer_id': self.customer_id.id,
+            'customer_nickname': self.customer_nickname,
+            'user_name': self.user_name,
+            'drive_c_free_type': self.drive_c_free_type,
+            'drive_c_total_size': self.drive_c_total_size,
+            'drive_c_total_type': self.drive_c_total_type,
+            'drive_d_free_type': self.drive_d_free_type,
+            'drive_d_total_size': self.drive_d_total_size,
+            'drive_d_total_type': self.drive_d_total_type,
+            'drive_special_name': self.drive_special_name,
+            'drive_special_total_size': self.drive_special_total_size,
+            'drive_special_total_type': self.drive_special_total_type,
+            'doctor_data_total': self.doctor_data_total,
+            'doctor_data_type': self.doctor_data_type,
+            'doctor_basic_total': self.doctor_basic_total,
+            'doctor_basic_type': self.doctor_basic_type,
+            'data_type': self.data_type,
+            'basic_type': self.basic_type,
+            'evolio_type': self.evolio_type,
+            'location': self.location,
+            # Set other fields to False or their default value if you want to reset them
+            # Clear specified fields
+            'charge': False,
+            'complete': False,
+            'work_result': False,
+            'remark': False,
+            'doctor_basic_free': False,
+            'doctor_data_free': False,
+            'oracle_log': False,
+            'data_size': False,
+            'basic_size': False,
+            'evolio_size': False,
+            'outside_backup': False,
+            'server_backup': False,
+            'drive_special_free_size': False,
+            'drive_d_free_size': False,
+            'drive_c_free_size': False,
+            'monthly_end_time': False,
+            'monthly_start_time': False,
+            'monthly_end_date':  fields.Date.context_today(self),
+            'monthly_start_date': fields.Date.context_today(self),
+        }
+        # Duplicate the record with the specified default values
+        new_record = self.copy(default=default_vals)
+        # Return an action to open the form view of the newly created record
+        return {
+            'name': _('Duplicate Monthly Report'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'monthly.report',
+            'res_id': new_record.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'current',
+            'context': self.env.context,
+        }

@@ -3,12 +3,8 @@
     <record id="view_monthly_report_form" model="ir.ui.view">
         <field name="name">monthly.report.form</field>
         <field name="model">monthly.report</field>
-
         <field name="arch" type="xml">
             <form string="Monthly Report">
-                <header>
-                    <!-- Print button placed in the form view header -->
-                </header>
                 <sheet>
                     <group string="User Info">
                         <group>
@@ -126,6 +122,7 @@
                 <field name="basic_size" string="Basic Size" />
                 <field name="basic_type" string=" " />
             </tree>
+            <button string="Duplicate" type="object" name="action_duplicate_recordd" class="oe_highlight"/>
         </field>
     </record>
 
