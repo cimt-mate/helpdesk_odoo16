@@ -36,15 +36,15 @@
         <field name="model">cimt_helpdesk.ticket</field>
         <field name="arch" type="xml">
             <tree string="Helpdesk Ticket">
-                <field name="ticket_detail" />
-                <field name="customer_id" />
+                <!-- <field name="ticket_detail" /> -->
                 <field name="ticket_date" />
+                <field name="customer_id" />
                 <field name="worker_name" />
                 <field name="ticket_minutes" />
                 <field name="user_name" />
 
             </tree>
-           <header>
+            <header>
                 <!-- Your new print button -->
                 <button string="Print Tickets" type="object" name="action_print_tickets"
                     class="oe_highlight" />
@@ -53,14 +53,39 @@
 
         </field>
     </record>
-    
+
+    <!-- Search view for the cimt_helpdesk.ticket model -->
+    <!-- Define the search view -->
+    <record id="view_helpdesk_ticket_search" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.search</field>
+        <field name="model">cimt_helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <search string="Search Helpdesk Ticket">
+                <field name="customer_id" string="Customer" />
+                <field name="ticket_detail" string="Ticket Detail" />
+                <field name="user_name" string="User Name" />
+                <field name="worker_name" string="Worker Name" />
+            </search>
+        </field>
+    </record>
+
+
     <menuitem id="menu_helpdesk" name="Helpdesk"
         sequence="10" />
     <menuitem id="menu_helpdesk_ticket" name="Tickets"
         parent="menu_helpdesk"
         action="action_helpdesk_ticket"
         sequence="1" />
-        
+
+    <record id="action_view_helpdesk_tickets" model="ir.actions.act_window">
+        <field name="name">Helpdesk Tickets</field>
+        <field name="res_model">cimt_helpdesk.ticket</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_helpdesk_ticket_search" />
+        <!-- other fields like domain, context, etc -->
+    </record>
+
+
     <record id="action_report_helpdesk_tickets" model="ir.actions.report">
         <field name="name">Helpdesk Ticket Report</field>
         <field name="model">cimt_helpdesk.ticket</field>
@@ -69,8 +94,11 @@
         <field name="report_file">helpdesk_odoo16.report_helpdesk_tickets_document</field>
         <field name="binding_model_id" ref="helpdesk_odoo16.model_cimt_helpdesk_ticket" />
         <field name="binding_type">report</field>
-        <field name="print_report_name">'WorkReport_CIMT_' + (object.display_name.split(',')[-1] 
-            if object.display_name else '').replace('/', '_')</field>
+        <field name="print_report_name">
+            (object.ticket_date.strftime('%Y%m%d') if
+            object.ticket_date else 'UnknownDate') + '_' + (object.customer_nickname or
+            'UnknownCustomer') + '_WorkReport'
+        </field>
     </record>
-     
+
 </odoo>

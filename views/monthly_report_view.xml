@@ -12,89 +12,91 @@
                 <sheet>
                     <group string="User Info">
                         <group>
-                            <field name="customer_id" widget="many2one" options="{'no_create': True}" />
-                            <field name="customer_nickname" readonly="1"/> <!-- Add this line -->
-                            <field name="location"/>
+                            <field name="customer_id" widget="many2one"
+                                options="{'no_create': True}" />
+                            <field name="location" />
                         </group>
                         <group>
-                            <field name="user_id" widget="many2one" options="{'no_create': True}" />
+                            <field name="user_name" />
                             <!-- <field name="monthly_date"/> -->
                         </group>
                     </group>
                     <group string="Date Time Info" col="2">
                         <group>
-                            <field name="monthly_start_date"/>
-                            <field name="monthly_start_time" widget="float_time"/>
+                            <field name="monthly_start_date" />
+                            <field name="monthly_start_time" widget="float_time" />
                         </group>
                         <group>
-                            <field name="monthly_end_date"/>
-                            <field name="monthly_end_time" widget="float_time"/>
+                            <field name="monthly_end_date" />
+                            <field name="monthly_end_time" widget="float_time" />
                         </group>
                     </group>
                     <group string="System Info" col="4">
                         <group>
-                            <field name="drive_c_free_size"/>
-                            <field name="drive_d_free_size"/>
-                            <field name="drive_special_free_size"/>
+                            <field name="drive_c_free_size" />
+                            <field name="drive_d_free_size" />
+                            <field name="drive_special_free_size" />
                         </group>
                         <group>
-                            <field name="drive_c_free_type"/>
-                            <field name="drive_d_free_type"/>
-                            <field name="drive_special_free_type"/>
+                            <field name="drive_c_free_type" />
+                            <field name="drive_d_free_type" />
+                            <field name="drive_special_free_type" />
                         </group>
                         <group>
-                            <field name="drive_c_total_size"/>
-                            <field name="drive_d_total_size"/>
-                            <field name="drive_special_total_size"/>
+                            <field name="drive_c_total_size" />
+                            <field name="drive_d_total_size" />
+                            <field name="drive_special_total_size" />
                         </group>
                         <group>
-                            <field name="drive_c_total_type"/>
-                            <field name="drive_d_total_type"/>
-                            <field name="drive_special_total_type"/>
+                            <field name="drive_c_total_type" />
+                            <field name="drive_d_total_type" />
+                            <field name="drive_special_total_type" />
                         </group>
+                    </group>
+                    <group col="4">
+                        <field name="drive_special_name" />
                     </group>
                     <group string="Backup Info" col="2">
                         <group>
-                            <field name="server_backup"/>
-                            <field name="data_size"/>
-                            <field name="basic_size"/>
-                            <field name="evolio_size"/>
-                            <field name="oracle_log"/>  
+                            <field name="server_backup" />
+                            <field name="data_size" />
+                            <field name="basic_size" />
+                            <field name="evolio_size" />
+                            <field name="oracle_log" />
                         </group>
                         <group>
-                            <field name="outside_backup"/>
-                            <field name="data_type"/>
-                            <field name="basic_type"/>
-                            <field name="evolio_type"/>
+                            <field name="outside_backup" />
+                            <field name="data_type" />
+                            <field name="basic_type" />
+                            <field name="evolio_type" />
                         </group>
                     </group>
                     <group string="Doctor Info" col="3">
                         <group>
-                            <field name="doctor_data_free"/>
-                            <field name="doctor_basic_free"/>
+                            <field name="doctor_data_free" />
+                            <field name="doctor_basic_free" />
                         </group>
                         <group>
-                            <field name="doctor_data_total"/>
-                            <field name="doctor_basic_total"/>
+                            <field name="doctor_data_total" />
+                            <field name="doctor_basic_total" />
                         </group>
                         <group>
-                            <field name="doctor_data_type"/>
-                            <field name="doctor_basic_type"/>
+                            <field name="doctor_data_type" />
+                            <field name="doctor_basic_type" />
                         </group>
                     </group>
                     <group string="Charge and Results" col="2">
                         <group>
-                            <field name="charge"/>
+                            <field name="charge" />
                         </group>
                         <group>
-                            <field name="complete"/>
+                            <field name="complete" />
                         </group>
                     </group>
                     <group string="Detail">
-                        <field name="work_result"/>
-                        <field name="remark"/>
+                        <field name="work_result" />
+                        <field name="remark" />
                     </group>
-                        <!-- Add other fields here -->
                 </sheet>
             </form>
         </field>
@@ -106,47 +108,38 @@
         <field name="model">monthly.report</field>
         <field name="arch" type="xml">
             <tree string="Monthly Reports">
-                <field name="customer_id"/>
-                <field name="customer_nickname"/>
-                <field name="user_id"/>
-                <field name="location"/>
-                <field name="monthly_start_date"/>
-                <field name="monthly_end_date"/>
-                <field name="monthly_start_time"/>
-                <field name="monthly_end_time"/>
-                <field name="drive_c_free_size"/>
-                <field name="drive_c_total_size"/>
-                <field name="drive_c_free_type"/>
-                <field name="drive_c_total_type"/>
-                <field name="drive_d_free_size"/>
-                <field name="drive_d_total_size"/>
-                <field name="drive_d_free_type"/>
-                <field name="drive_d_total_type"/>
-                <field name="drive_special_free_size"/>
-                <field name="drive_special_total_size"/>
-                <field name="drive_special_free_type"/>
-                <field name="drive_special_total_type"/>
-                <field name="server_backup"/>
-                <field name="outside_backup"/>
-                <field name="data_size"/>
-                <field name="data_type"/>
-                <field name="basic_size"/>
-                <field name="basic_type"/>
-                <field name="evolio_size"/>
-                <field name="evolio_type"/>
-                <field name="oracle_log"/>
-                <field name="doctor_data_free"/>
-                <field name="doctor_data_total"/>
-                <field name="doctor_data_type"/>
-                <field name="doctor_basic_free"/>
-                <field name="doctor_basic_total"/>
-                <field name="doctor_basic_type"/>
-                <field name="charge"/>
-                <field name="complete"/>
-                <field name="work_result"/>
-                <field name="remark"/>
-                
+                <field name="monthly_start_date" string="Date" />
+                <field name="customer_nickname" string="Customer" />
+                <field name="user_name" string="Support Name" />
+                <field name="server_backup" string="Backup" />
+                <field name="outside_backup" string="Outside" />
+                <field name="drive_c_free_size" string="C Free" />
+                <field name="drive_c_free_type" string=" " />
+                <field name="drive_d_free_size" string="D Free" />
+                <field name="drive_d_free_type" string=" " />
+                <field name="doctor_data_free" string="Data Free" />
+                <field name="doctor_data_type" string=" " />
+                <field name="doctor_basic_free" string="Basic Free" />
+                <field name="doctor_basic_type" string=" " />
+                <field name="data_size" string="Data Size" />
+                <field name="data_type" string=" " />
+                <field name="basic_size" string="Basic Size" />
+                <field name="basic_type" string=" " />
             </tree>
+        </field>
+    </record>
+
+    <record id="view_monthly_report_search" model="ir.ui.view">
+        <field name="name">monthly.report.search</field>
+        <field name="model">monthly.report</field>
+        <field name="arch" type="xml">
+            <search string="Search Monthly Report">
+                <field name="customer_nickname" string="Customer Nickname" />
+                <field name="user_name" string="User Name" />
+                <field name="monthly_start_date" string="Start Date" />
+                <field name="server_backup" string="Backup" />
+                <field name="outside_backup" string="Outside" />
+            </search>
         </field>
     </record>
 
@@ -155,6 +148,7 @@
         <field name="name">Monthly Reports</field>
         <field name="res_model">monthly.report</field>
         <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_monthly_report_search" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new Report
@@ -166,7 +160,7 @@
     <menuitem id="menu_monthly_report" name="Monthly"
         parent="menu_helpdesk"
         action="action_monthly_reports"
-        sequence="2"/>
+        sequence="2" />
 
     <!-- Report Action -->
     <record id="action_report_monthly_report" model="ir.actions.report">
@@ -175,9 +169,12 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">helpdesk_odoo16.report_monthly_tickets_document</field>
         <field name="report_file">helpdesk_odoo16.report_monthly_tickets_document</field>
-        <field name="binding_model_id" ref="helpdesk_odoo16.model_monthly_report"/>
+        <field name="binding_model_id" ref="helpdesk_odoo16.model_monthly_report" />
         <field name="binding_type">report</field>
-        <field name="print_report_name">'MonthlyReport_CIMT_' + (object.display_name.split(',')[-1] 
-            if object.display_name else '').replace('/', '_')</field>
+        <field name="print_report_name">
+            (object.monthly_start_date.strftime('%Y%m%d') if
+            object.monthly_start_date else 'UnknownDate') + '_' + (object.customer_nickname or
+            'UnknownCustomer') + '_MonthlyReport'
+        </field>
     </record>
 </odoo>
