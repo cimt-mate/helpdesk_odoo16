@@ -189,15 +189,15 @@ class MonthlyReport(models.Model):
             'monthly_start_date': fields.Date.context_today(self),
         }
         # Duplicate the record with the specified default values
-        new_record = self.copy(default=default_vals)
-        # Return an action to open the form view of the newly created record
+        new_context = self.env.context.copy()
+        new_context.update({'default_' + field: value for field, value in default_vals.items()})
+
+        # Return an action to open a new form view in 'edit' mode with the default values
         return {
             'name': _('Duplicate Monthly Report'),
             'type': 'ir.actions.act_window',
             'res_model': 'monthly.report',
-            'res_id': new_record.id,
-            'view_type': 'form',
-            'view_mode': 'form',
-            'target': 'current',
-            'context': self.env.context,
+            'views': [(False, 'form')],
+            'target': 'new',
+            'context': new_context,
         }
