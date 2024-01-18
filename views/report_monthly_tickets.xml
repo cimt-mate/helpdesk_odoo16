@@ -155,7 +155,7 @@
                                             Operator</th>
                                         <th
                                             style="text-align: center; width: 300px; font-size: 16px; border: 2px solid #000;">
-                                            <span t-field="doc.user_id" />
+                                            <span t-field="doc.user_name" />
                                         </th>
                                         <!-- Add more headers as needed -->
                                     </tr>
