@@ -110,7 +110,7 @@
             <tree string="Monthly Reports">
                 <field name="monthly_start_date" string="Date" />
                 <field name="customer_nickname" string="Customer" />
-                <field name="user_name" string="Name" />
+                <field name="user_name" string="Support Name" />
                 <field name="server_backup" string="Backup" />
                 <field name="outside_backup" string="Outside" />
                 <field name="drive_c_free_size" string="C Free" />
@@ -129,11 +129,26 @@
         </field>
     </record>
 
+    <record id="view_monthly_report_search" model="ir.ui.view">
+        <field name="name">monthly.report.search</field>
+        <field name="model">monthly.report</field>
+        <field name="arch" type="xml">
+            <search string="Search Monthly Report">
+                <field name="customer_nickname" string="Customer Nickname" />
+                <field name="user_name" string="User Name" />
+                <field name="monthly_start_date" string="Start Date" />
+                <field name="server_backup" string="Backup" />
+                <field name="outside_backup" string="Outside" />
+            </search>
+        </field>
+    </record>
+
     <!-- Action to Open the Views -->
     <record id="action_monthly_reports" model="ir.actions.act_window">
         <field name="name">Monthly Reports</field>
         <field name="res_model">monthly.report</field>
         <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_monthly_report_search" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new Report
