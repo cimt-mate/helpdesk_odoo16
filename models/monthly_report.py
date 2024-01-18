@@ -5,6 +5,7 @@ from datetime import datetime
 class MonthlyReport(models.Model):
     _name = 'monthly.report'
     _description = 'Monthly Report'
+    _order = 'monthly_start_date desc'
 
     customer_id = fields.Many2one(
         'res.partner', 
@@ -23,7 +24,13 @@ class MonthlyReport(models.Model):
     company_id = fields.Many2one('res.company', string='Company', 
         default=lambda self: self.env.company)
 
-    user_id = fields.Many2one('res.users', string='Worker', default=lambda self: self.env.user, readonly=True)
+    # Get the current user's login name as the default value for user_name
+    user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.user, readonly=True)
+    # Free text input field with the current user's name as the default value
+    user_name = fields.Char(
+        string='User Name', 
+        default=lambda self: self._default_user_name()
+    )
     location = fields.Char(string='Location')
     monthly_start_date = fields.Date(string='Monthly Start Date', required=True, default=fields.Date.context_today)
     monthly_end_date = fields.Date(string='Monthly End Date', required=True)
@@ -34,17 +41,18 @@ class MonthlyReport(models.Model):
 
     # monthly_end = fields.Datetime(string='Monthly End Date', required=True, default=fields.Date.context_today) 
     drive_c_free_size = fields.Float(string='Drive C Free')
-    drive_c_free_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='C Type')
+    drive_c_free_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='C Type')
     drive_c_total_size = fields.Float(string='Drive C Total')
-    drive_c_total_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='C Type')
+    drive_c_total_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='C Type')
     drive_d_free_size = fields.Float(string='Drive D Free')
-    drive_d_free_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='D Type')
+    drive_d_free_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='D Type')
     drive_d_total_size = fields.Float(string='Drive D Total')
-    drive_d_total_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='D Type')
-    drive_special_free_size = fields.Float(string='Drive Special Free')
-    drive_special_total_size = fields.Float(string='Drive Special Total')
-    drive_special_free_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='Special Type')    
-    drive_special_total_type = fields.Selection([('GB', 'GB'), ('TB', 'TB')], string='Special Type')
+    drive_d_total_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='D Type')
+    drive_special_name = fields.Char(string='Drive S Name', size=1)
+    drive_special_free_size = fields.Float(string='Drive S Free')
+    drive_special_total_size = fields.Float(string='Drive S Total')
+    drive_special_free_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='S Type')    
+    drive_special_total_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='S Type')
 
     server_backup = fields.Selection([('OK', 'OK'), ('NG', 'NG'), ('NO', 'NO'), ('UNKNOWN', 'UNKNOWN')], string='Backup Type')
     outside_backup = fields.Selection([('OK', 'OK'), ('NG', 'NG'), ('NO', 'NO'), ('UNKNOWN', 'UNKNOWN')], string='Outside Backup Type')
@@ -58,10 +66,10 @@ class MonthlyReport(models.Model):
     
     doctor_data_free = fields.Float(string='Doctor Data Free', required=True)
     doctor_data_total = fields.Float(string='Doctor Data Total', required=True)
-    doctor_data_type = fields.Selection([('MB', 'MB')], string='Unit')
+    doctor_data_type = fields.Selection([('KB', 'KB'),('MB', 'MB'), ('GB', 'GB')], string='Unit')
     doctor_basic_free = fields.Float(string='Doctor Basic Free', required=True)
     doctor_basic_total = fields.Float(string='Doctor Basic Total', required=True)
-    doctor_basic_type = fields.Selection([('MB', 'MB')], string='Unit')
+    doctor_basic_type = fields.Selection([('KB', 'KB'),('MB', 'MB'), ('GB', 'GB')], string='Unit')
 
 
     charge = fields.Boolean(string='Charge')
@@ -119,3 +127,14 @@ class MonthlyReport(models.Model):
         # Generate the report for the entire recordset
         return self.env.ref('monthly.action_report_monthly_report').report_action(record_ids)
     
+    @api.onchange('drive_c_free_type')
+    def _onchange_drive_c_free_type(self):
+        self.drive_c_total_type = self.drive_c_free_type
+
+    @api.onchange('drive_d_free_type')
+    def _onchange_drive_d_free_type(self):
+        self.drive_d_total_type = self.drive_d_free_type
+
+    @api.onchange('drive_special_free_type')
+    def _onchange_drive_special_free_type(self):
+        self.drive_special_total_type = self.drive_special_free_type

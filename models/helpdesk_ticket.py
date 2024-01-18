@@ -5,6 +5,7 @@ import datetime
 class HelpdeskTicket(models.Model):
     _name = 'cimt_helpdesk.ticket'
     _description = 'Helpdesk Ticket'
+    _order = 'ticket_date desc'
 
     cim_field = fields.Char(string='CIM Field')
 
