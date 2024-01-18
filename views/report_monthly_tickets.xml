@@ -244,8 +244,8 @@
 
                                 <!-- Row 5 -->
                                 <tr>
-                                    <td class="td-left-light" style="width:120px;" rowspan="2">Drive
-                                        Special</td>
+                                    <td class="td-left-light" style="width:120px;" rowspan="2">Drive 
+                                        <span t-field="doc.drive_special_name" /></td>
                                     <td class="td-left-dark" style="font-weight: bold;">Total Space</td>
                                     <td class="td-right-light" style="background-color: #FFF;"
                                         colspan="2">
