@@ -48,21 +48,12 @@ class HelpdeskTicket(models.Model):
         return self.env.user.name
     
     def action_print_tickets(self):
-        context = dict(self.env.context or {})
-        active_ids = context.get('active_ids', [])
-        
-        if not active_ids:
-            raise UserError(_("No tickets to print."))
+        if not self:
+            raise UserError("No records selected for printing.")
 
-        tickets = self.env['cimt_helpdesk.ticket'].browse(active_ids)
+        # Collect the IDs of all selected records
+        record_ids = self.ids
 
-        # Example of custom file name: "Helpdesk_Tickets_YYYY-MM-DD"
-        report_name = f"Helpdesk_Tickets_{datetime.datetime.now().strftime('%Y-%m-%d')}"
+        # Generate a single PDF report for all selected records
+        return self.env.ref('helpdesk_odoo16.action_report_helpdesk_tickets').report_action(record_ids)
 
-        
-        return {
-            'type': 'ir.actions.act_url',
-            'url': '/report/pdf/helpdesk_odoo16.action_report_helpdesk_tickets/%s?download=true' % ','.join(map(str, active_ids)),
-            'target': 'new',
-            'print_report_name': report_name,
-        }

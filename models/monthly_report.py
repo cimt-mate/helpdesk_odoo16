@@ -15,7 +15,7 @@ class MonthlyReport(models.Model):
         domain=[('is_client', '=', True)], 
         required=True,
     )
-
+    
     customer_nickname = fields.Char(
         string='Nickname', 
         related='customer_id.nickname',
@@ -34,51 +34,51 @@ class MonthlyReport(models.Model):
         default=lambda self: self._default_user_name()
     )
     location = fields.Char(string='Location')
-    monthly_start_date = fields.Date(string='Monthly Start Date', required=True, default=fields.Date.context_today)
-    monthly_end_date = fields.Date(string='Monthly End Date', required=True)
-    monthly_start_time = fields.Float(string='Start time')
-    monthly_end_time = fields.Float(string='End time')
+    monthly_start_date = fields.Date(string='Monthly Start Date', required=True, default=fields.Date.context_today,copy=fields.Date.context_today)
+    monthly_end_date = fields.Date(string='Monthly End Date', required=True,copy=fields.Date.context_today)
+    monthly_start_time = fields.Float(string='Start time',copy=False)
+    monthly_end_time = fields.Float(string='End time',copy=False)
     time_difference = fields.Float(string='Time Difference', compute='_compute_time_difference', store=True)
 
 
     # monthly_end = fields.Datetime(string='Monthly End Date', required=True, default=fields.Date.context_today) 
-    drive_c_free_size = fields.Float(string='Drive C Free')
+    drive_c_free_size = fields.Float(string='Drive C Free',copy=False)
     drive_c_free_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='C Type')
     drive_c_total_size = fields.Float(string='Drive C Total')
     drive_c_total_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='C Type')
-    drive_d_free_size = fields.Float(string='Drive D Free')
-    drive_d_free_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='D Type')
+    drive_d_free_size = fields.Float(string='Drive D Free',copy=False)
+    drive_d_free_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='D Type',)
     drive_d_total_size = fields.Float(string='Drive D Total')
     drive_d_total_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='D Type')
-    drive_special_name = fields.Char(string='Drive S Name', size=1)
-    drive_special_free_size = fields.Float(string='Drive S Free')
+    drive_special_name = fields.Char(string='Drive S Name', size=1,copy=False)
+    drive_special_free_size = fields.Float(string='Drive S Free',copy=False)
     drive_special_total_size = fields.Float(string='Drive S Total')
     drive_special_free_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='S Type')    
     drive_special_total_type = fields.Selection([('MB', 'MB'),('GB', 'GB'), ('TB', 'TB')], string='S Type')
 
-    server_backup = fields.Selection([('OK', 'OK'), ('NG', 'NG'), ('NO', 'NO'), ('UNKNOWN', 'UNKNOWN')], string='Backup Type')
-    outside_backup = fields.Selection([('OK', 'OK'), ('NG', 'NG'), ('NO', 'NO'), ('UNKNOWN', 'UNKNOWN')], string='Outside Backup Type')
-    data_size = fields.Float(string='Data Size')
+    server_backup = fields.Selection([('OK', 'OK'), ('NG', 'NG'), ('NO', 'NO'), ('UNKNOWN', 'UNKNOWN')], string='Backup Type',copy=False)
+    outside_backup = fields.Selection([('OK', 'OK'), ('NG', 'NG'), ('NO', 'NO'), ('UNKNOWN', 'UNKNOWN')], string='Outside Backup Type',copy=False)
+    data_size = fields.Float(string='Data Size',copy=False)
     data_type = fields.Selection([('KB', 'KB'), ('MB', 'MB'), ('GB', 'GB'), ('TB', 'TB')], string='Data Unit')
-    basic_size = fields.Float(string='Basic Size')
+    basic_size = fields.Float(string='Basic Size',copy=False)
     basic_type = fields.Selection([('KB', 'KB'), ('MB', 'MB'), ('GB', 'GB'), ('TB', 'TB')], string='Basic Unit')
-    evolio_size = fields.Float(string='EVOLIO Size')
+    evolio_size = fields.Float(string='EVOLIO Size',copy=False)
     evolio_type = fields.Selection([('KB', 'KB'), ('MB', 'MB'), ('GB', 'GB'), ('TB', 'TB')], string='Evolio Unit')    
-    oracle_log = fields.Char(string='Oracle Log')
+    oracle_log = fields.Char(string='Oracle Log',copy=False)
     
-    doctor_data_free = fields.Float(string='Doctor Data Free', required=True)
+    doctor_data_free = fields.Float(string='Doctor Data Free',copy=False)
     doctor_data_total = fields.Float(string='Doctor Data Total', required=True)
     doctor_data_type = fields.Selection([('KB', 'KB'),('MB', 'MB'), ('GB', 'GB')], string='Unit')
-    doctor_basic_free = fields.Float(string='Doctor Basic Free', required=True)
+    doctor_basic_free = fields.Float(string='Doctor Basic Free',copy=False)
     doctor_basic_total = fields.Float(string='Doctor Basic Total', required=True)
     doctor_basic_type = fields.Selection([('KB', 'KB'),('MB', 'MB'), ('GB', 'GB')], string='Unit')
 
 
-    charge = fields.Boolean(string='Charge')
-    complete = fields.Boolean(string='Complete')    
+    charge = fields.Boolean(string='Charge',copy=False)
+    complete = fields.Boolean(string='Complete',copy=False)    
     
-    work_result = fields.Text(string='Work Result')
-    remark = fields.Text(string='Remark')
+    work_result = fields.Text(string='Work Result',copy=False)
+    remark = fields.Text(string='Remark',copy=False)
 
     truncated_customer_id = fields.Char(compute='_compute_truncated_fields')
     truncated_location = fields.Char(compute='_compute_truncated_fields')
@@ -168,23 +168,6 @@ class MonthlyReport(models.Model):
             'location': self.location,
             # Set other fields to False or their default value if you want to reset them
             # Clear specified fields
-            'charge': False,
-            'complete': False,
-            'work_result': False,
-            'remark': False,
-            'doctor_basic_free': False,
-            'doctor_data_free': False,
-            'oracle_log': False,
-            'data_size': False,
-            'basic_size': False,
-            'evolio_size': False,
-            'outside_backup': False,
-            'server_backup': False,
-            'drive_special_free_size': False,
-            'drive_d_free_size': False,
-            'drive_c_free_size': False,
-            'monthly_end_time': False,
-            'monthly_start_time': False,
             'monthly_end_date':  fields.Date.context_today(self),
             'monthly_start_date': fields.Date.context_today(self),
         }
