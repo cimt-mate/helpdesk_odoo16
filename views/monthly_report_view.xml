@@ -121,8 +121,10 @@
                 <field name="data_type" string=" " />
                 <field name="basic_size" string="Basic Size" />
                 <field name="basic_type" string=" " />
+                    <!-- Your new print button -->
+                    <button string="Duplicate" type="object" name="action_duplicate_recordd" class="oe_highlight"/>
+                    <!-- Other buttons like 'Create' or 'Import' would also be defined here -->
             </tree>
-            <button string="Duplicate" type="object" name="action_duplicate_recordd" class="oe_highlight"/>
         </field>
     </record>
 
@@ -174,4 +176,5 @@
             'UnknownCustomer') + '_MonthlyReport'
         </field>
     </record>
+
 </odoo>
