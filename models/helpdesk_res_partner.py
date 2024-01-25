@@ -36,6 +36,6 @@ class HelpdeskResPartner(models.Model):
     @api.depends('sale_order_ids.contract_end_date')  # Assuming sale_order_ids is the reverse one2many relation
     def _compute_max_contract_end_date(self):  # Make sure this matches the name in the field definition
         for partner in self:
-            related_enddates = partner.sale_order_ids.mapped('contract_end_date')
-            dates = [date for date in related_enddates if isinstance(date, fields.Date)]
-            partner.max_contract_end_date = max(dates) if dates else False
+            # Filter out False values which represent empty dates in Odoo
+            related_enddates = filter(None, partner.sale_order_ids.mapped('contract_end_date'))
+            partner.max_contract_end_date = max(related_enddates) if related_enddates else False
