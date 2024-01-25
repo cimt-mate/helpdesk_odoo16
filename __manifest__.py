@@ -12,7 +12,7 @@
         'views/monthly_report_view.xml',
         'views/report_monthly_tickets.xml',
         'views/report_helpdesk_tickets.xml',
-        'views/heldesk_res_partner_view.xml'
+        # 'views/heldesk_res_partner_view.xml'
     ],
     'demo': [],
     'installable': True,
