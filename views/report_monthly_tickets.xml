@@ -5,15 +5,10 @@
                 <t t-call="web.external_layout">
                     <head>
                         <style>
-                            @font-face {
-                            font-family: 'NotoSansThai';
-                            src: url('/helpdesk_odoo16/static/font/NotoSansThaiUIRegular.ttf')
-                            format('truetype');
-                            font-weight: normal;
-                            font-style: normal;
-                            }
-                            .thai-text {
-                            font-family: 'NotoSansThai', sans-serif;
+                            @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&amp;display=swap');
+                        
+                            body, .thai-text, .th-default, .td-left-light, .td-left-dark, .td-right-light {
+                                font-family: 'Chakra Petch', sans-serif;
                             }
                             .th-default {
                             color: #000;

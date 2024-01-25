@@ -4,17 +4,15 @@
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
                     <head>
-                    <style>
-                        @font-face {
-                          font-family: 'NotoSansThai';
-                          src: url('/helpdesk_odoo16/static/font/NotoSansThaiUIRegular.ttf') format('truetype');
-                          font-weight: normal;
-                          font-style: normal;
-                        }
-                        .thai-text {
-                          font-family: 'NotoSansThai', sans-serif;
-                        }
-                      </style>
+                        <style>
+                            <!-- Import Noto Sans Thai font from Google Fonts -->
+                            @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&amp;display=swap');
+                        
+                            body, h1, h2, h5, p, div {
+                                font-family: 'Chakra Petch', sans-serif;
+                            }
+                        </style>
+                        
                     </head>
                     <div class="page">
                         <div style="display: flex; justify-content: space-between; align-items: top;">
@@ -59,7 +57,7 @@
                         <div style="solid #000; padding-top: 40px; padding-left: 10px;">
                             <img src="/helpdesk_odoo16/static/image/signature.png" style="max-height: 130px;"/>
                         </div>
-                        </div>
+                    </div>
                 </t>
             </t>
         </t>
