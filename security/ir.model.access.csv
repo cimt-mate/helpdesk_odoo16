@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_cimt_helpdesk_ticket,helpdesk.ticket,model_cimt_helpdesk_ticket,,1,1,1,1
 access_monthly_report,monthly.report,model_monthly_report,,1,1,1,1
+access_helpdesk_res_partner,helpdesk.res.partner,model_helpdesk_res_partner_info,,1,1,1,1

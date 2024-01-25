@@ -5,13 +5,13 @@ class HelpdeskResPartnerInfo(models.Model):
     _description = 'Additional Info for Partners'
 
    # Many2one relationship to res.partner
-    partner_id = fields.Many2one('res.partner', string="Partner", required=True)
+    partner_id = fields.Many2one('res.partner', string="Partner", required=True, domain=[('is_client', '=', True)])
 
     # Related fields to access res.partner data
     partner_name = fields.Char(related='partner_id.name', string="Customer Name", readonly=True)
     partner_street = fields.Char(related='partner_id.street', string="Street", readonly=True)
     partner_nickname = fields.Char(related='partner_id.nickname', string="Nick Name", readonly=True)
-    partner_trader = fields.Char(related='partner_id.trader_selection', string="Trader", readonly=True)
+    # partner_trader = fields.Char(related='partner_id.trader_selection', string="Trader", readonly=True)
     
 
     # Your new fields
