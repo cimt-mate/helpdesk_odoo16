@@ -2,6 +2,9 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 from datetime import datetime
 from odoo.tools.translate import _
+from PyPDF2 import PdfFileReader, PdfFileWriter
+import base64
+import io
 
 
 class MonthlyReport(models.Model):
@@ -168,6 +171,7 @@ class MonthlyReport(models.Model):
             'location': self.location,
             # Set other fields to False or their default value if you want to reset them
             # Clear specified fields
+
             'monthly_end_date':  fields.Date.context_today(self),
             'monthly_start_date': fields.Date.context_today(self),
         }
