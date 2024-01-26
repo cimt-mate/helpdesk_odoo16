@@ -1,20 +1,9 @@
 from odoo import models, fields, api
 
-class HelpdeskResPartnerInfo(models.Model):
-    _name = 'helpdesk.res.partner.info'
-    _description = 'Additional Info for Partners'
+class HelpdeskResPartner(models.Model):
+    _inherit = 'res.partner'
 
-   # Many2one relationship to res.partner
-    partner_id = fields.Many2one('res.partner', string="Partner", required=True, domain=[('is_client', '=', True)])
-
-    # Related fields to access res.partner data
-    partner_name = fields.Char(related='partner_id.name', string="Customer Name", readonly=True)
-    partner_street = fields.Char(related='partner_id.street', string="Street", readonly=True)
-    partner_nickname = fields.Char(related='partner_id.nickname', string="Nick Name", readonly=True)
-    # partner_trader = fields.Char(related='partner_id.trader_selection', string="Trader", readonly=True)
-    
-
-    # Your new fields
+    # # New field
     remark = fields.Text(string="Remark")
     server_name = fields.Char(string="Server Name")
     os_name = fields.Char(string="OS Name")
@@ -25,17 +14,28 @@ class HelpdeskResPartnerInfo(models.Model):
     oracle_version = fields.Char(string="Oracle Version")
     oracle_path = fields.Char(string="Oracle Path")
     backup_path = fields.Char(string="Backup Path")
-    backup_out_path = fields.Char(string="Backup Outside Path")
+    backup_out_path = fields.Char(string="Backup Outside Path") 
     oracle_language = fields.Char(string="Oracle Language")
     doctor_data_name = fields.Char(string="Doctor Data Name")
     doctor_basic_name = fields.Char(string="Doctor Basic Name")
     license_info = fields.Text(string="License Info")
     license_expired_date = fields.Date(string="License Expired Date")
-    max_contract_end_date = fields.Date(string='Contract End Date', compute='_compute_max_contract_end_date')
+    # Get Max Contract End Date From Sales Order
+    max_contract_end_date = fields.Date(
+        string='Contract End Date',
+        compute='_compute_max_contract_end_date',
+        store=True,  # Storing the value is optional depending on your needs
+    )
 
-    @api.depends('partner_id.sale_order_ids.contract_end_date')
-    def _compute_max_contract_end_date(self):
-        for record in self:
-            # Filter out False values which represent empty dates in Odoo
-            related_enddates = filter(None, record.partner_id.sale_order_ids.mapped('contract_end_date'))
-            record.max_contract_end_date = max(related_enddates) if related_enddates else False
+
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        args += [('is_client', '=', True)]
+        return super(HelpdeskResPartner, self).search(args, offset, limit, order, count=count)
+
+    @api.depends('sale_order_ids.contract_end_date')  # Assuming sale_order_ids is the reverse one2many relation
+    def _compute_max_contract_end_date(self):  # Make sure this matches the name in the field definition
+        for partner in self:
+            related_enddates = partner.sale_order_ids.mapped('contract_end_date')
+            dates = [date for date in related_enddates if isinstance(date, fields.Date)]
+            partner.max_contract_end_date = max(dates) if dates else False

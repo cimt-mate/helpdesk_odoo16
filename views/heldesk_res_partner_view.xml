@@ -1,18 +1,18 @@
 <odoo>
-    <record id="view_helpdesk_res_partner_info_form" model="ir.ui.view">
-        <field name="name">helpdesk.res.partner.info.form</field>
-        <field name="model">helpdesk.res.partner.info</field>
+    <record id="view_helpdesk_res_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.helpdesk.form</field>
+        <field name="model">res.partner</field>
         <field name="arch" type="xml">
             <form string="Heldesk Customer">
                 <sheet>
                     <group string="Customer Info" col="2">
                         <group>
-                            <field name="partner_name" readonly="1" />
-                            <field name="partner_street" readonly="1" />
+                            <field name="name" readonly="1" />
+                            <field name="street" readonly="1" />
                         </group>
                         <group>
-                            <field name="partner_nickname" readonly="1" />
-                            <!-- <field name="partner_trader" readonly="1" /> -->
+                            <field name="nickname" readonly="1" />
+                            <field name="trader_selection" readonly="1" />
                         </group>
                         <group>
                             <field name="max_contract_end_date" readonly="1" />
@@ -64,13 +64,13 @@
         </field>
     </record>
     <!-- View -->
-    <record id="view_helpdesk_res_partner_info_tree" model="ir.ui.view">
-        <field name="name">helpdesk.res.partner.info.tree</field>
-        <field name="model">helpdesk.res.partner.info</field>
+    <record id="view_helpdesk_res_partner_tree" model="ir.ui.view">
+        <field name="name">helpdesk.res.partner.tree</field>
+        <field name="model">res.partner</field>
         <field name="arch" type="xml">
             <tree string="Helpdesk Customer">
-                <field name="partner_name" />
-                <!-- <field name="partner_trader" string="Trader" /> -->
+                <field name="name" />
+                <field name="trader_selection" string="Trader" />
                 <field name="max_contract_end_date" string="End Date" />
                 <field name="license_expired_date" string="Expired Date" />
                 <field name="ip" />
@@ -81,14 +81,14 @@
             </tree>
         </field>
     </record>
-    <!-- Search View for the new helpdesk.res.partner.info model -->
-    <record id="view_helpdesk_res_partner_info_search" model="ir.ui.view">
-        <field name="name">helpdesk.res.partner.info.search</field>
-        <field name="model">helpdesk.res.partner.info</field>
+    <!-- Search -->
+    <record id="view_helpdesk_res_partner_search" model="ir.ui.view">
+        <field name="name">helpdesk.res.partner.search</field>
+        <field name="model">res.partner</field>
         <field name="arch" type="xml">
             <search string="Search Helpdesk Customer">
-                <field name="partner_name" />
-                <!-- <field name="partner_trader" /> -->
+                <field name="name" />
+                <field name="trader_selection" />
                 <field name="server_name" />
                 <field name="os_name" />
                 <field name="oracle_version" />
@@ -96,21 +96,21 @@
             </search>
         </field>
     </record>
-
-    <!-- Action to open the views -->
-    <record id="action_helpdesk_res_partner_info" model="ir.actions.act_window">
-        <field name="name">Helpdesk Customer Info</field>
-        <field name="res_model">helpdesk.res.partner.info</field>
+    <!-- Action to Open the Views -->
+    <record id="action_helpdesk_customer" model="ir.actions.act_window">
+        <field name="name">Helpdesk Customer</field>
+        <field name="res_model">res.partner</field>
         <field name="view_mode">tree,form</field>
         <field name="view_ids"
-            eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_helpdesk_res_partner_info_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_helpdesk_res_partner_info_form')})]" />
+            eval="[(5, 0, 0),
+                                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_helpdesk_res_partner_tree')}),
+                                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_helpdesk_res_partner_form')})]" />
         <field name="context">{'create': False, 'delete': False}</field>
-        <field name="search_view_id" ref="view_helpdesk_res_partner_info_search" />
+        <field name="search_view_id" ref="view_helpdesk_res_partner_search" />
     </record>
 
-    <!-- Menu item to access the new action -->
-    <menuitem id="menu_helpdesk_res_partner_info" name="Helpdesk Customer Info"
+    <menuitem id="menu_helpdesk_customer" name="Customer"
         parent="menu_helpdesk"
-        action="action_helpdesk_res_partner_info"
+        action="action_helpdesk_customer"
         sequence="3" />
 </odoo>
