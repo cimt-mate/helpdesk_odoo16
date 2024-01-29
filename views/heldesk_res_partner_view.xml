@@ -107,6 +107,7 @@
                                           (0, 0, {'view_mode': 'form', 'view_id': ref('view_helpdesk_res_partner_form')})]" />
         <field name="context">{'create': False, 'delete': False}</field>
         <field name="search_view_id" ref="view_helpdesk_res_partner_search" />
+        <field name="domain">[('is_client', '=', True)]</field>
     </record>
 
     <menuitem id="menu_helpdesk_customer" name="Customer"
