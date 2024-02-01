@@ -26,6 +26,11 @@ class HelpdeskResPartner(models.Model):
         compute='_compute_max_contract_end_date',
         store=True,  # Storing the value is optional depending on your needs
     )
+    attachment_ids = fields.Many2many(
+        'ir.attachment', 'partner_attachment_rel',
+        'partner_id', 'attachment_id',
+        string='Attachments'
+    )
 
     @api.depends('sale_order_ids.contract_end_date')  # Assuming sale_order_ids is the reverse one2many relation
     def _compute_max_contract_end_date(self):  # Make sure this matches the name in the field definition

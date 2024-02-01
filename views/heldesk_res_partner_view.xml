@@ -59,6 +59,9 @@
                             <field name="license_info" />
                         </group>
                     </group>
+                    <group string="Attachment Files" col="2">
+                        <field name="attachment_ids" widget="many2many_binary"/>
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -79,6 +82,7 @@
                 <field name="backup_path" />
                 <field name="backup_out_path" string="Outside Path" />
             </tree>
+
         </field>
     </record>
     <!-- Search -->
@@ -103,8 +107,8 @@
         <field name="view_mode">tree,form</field>
         <field name="view_ids"
             eval="[(5, 0, 0),
-                                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_helpdesk_res_partner_tree')}),
-                                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_helpdesk_res_partner_form')})]" />
+         (0, 0, {'view_mode': 'tree', 'view_id': ref('view_helpdesk_res_partner_tree')}),
+         (0, 0, {'view_mode': 'form', 'view_id': ref('view_helpdesk_res_partner_form')})]" />
         <field name="context">{'create': False, 'delete': False}</field>
         <field name="search_view_id" ref="view_helpdesk_res_partner_search" />
         <field name="domain">[('is_client', '=', True)]</field>
