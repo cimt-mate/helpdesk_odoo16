@@ -1,6 +1,12 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 import datetime
+from odoo.http import request
+import base64
+import os
+from zipfile import ZipFile
+from io import BytesIO
+
 
 class HelpdeskTicket(models.Model):
     _name = 'cimt_helpdesk.ticket'
@@ -48,12 +54,10 @@ class HelpdeskTicket(models.Model):
         return self.env.user.name
     
     def action_print_tickets(self):
+    # Check if any records are selected
         if not self:
             raise UserError("No records selected for printing.")
 
-        # Collect the IDs of all selected records
-        record_ids = self.ids
-
-        # Generate a single PDF report for all selected records
-        return self.env.ref('helpdesk_odoo16.action_report_helpdesk_tickets').report_action(record_ids)
-
+        # Generate a PDF report for the selected record(s)
+        report = self.env.ref('helpdesk_odoo16.action_report_helpdesk_tickets').report_action(self.ids)
+        return report

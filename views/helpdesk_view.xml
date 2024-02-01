@@ -35,6 +35,12 @@
         <field name="name">helpdesk.ticket.tree</field>
         <field name="model">cimt_helpdesk.ticket</field>
         <field name="arch" type="xml">
+            <header>
+                <!-- Your new print button -->
+                <button string="Print Tickets" type="object" name="action_print_tickets"
+                    class="oe_highlight" />
+                <!-- Other buttons like 'Create' or 'Import' would also be defined here -->
+            </header>
             <tree string="Helpdesk Ticket">
                 <!-- <field name="ticket_detail" /> -->
                 <field name="ticket_date" />
@@ -53,6 +59,7 @@
 
         </field>
     </record>
+    
 
     <!-- Search view for the cimt_helpdesk.ticket model -->
     <!-- Define the search view -->
