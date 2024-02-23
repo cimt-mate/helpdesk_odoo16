@@ -15,7 +15,7 @@
                         <field name="ticket_minutes" />
                     </group>
                     <group>
-                        <field name="ticket_detail" widget="text" />
+                        <field name="ticket_detail" widget="html" />
                     </group>
                 </sheet>
             </form>
@@ -59,7 +59,7 @@
 
         </field>
     </record>
-    
+
 
     <!-- Search view for the cimt_helpdesk.ticket model -->
     <!-- Define the search view -->
