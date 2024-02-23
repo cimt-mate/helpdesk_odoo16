@@ -323,7 +323,7 @@
                                 style="display: block; height: 480px; /* 18 lines * 18px per line */ overflow: hidden;">
                                 <!-- The content of the report -->
                                 <p style="padding-left: 10px; padding-right: 10px; color: #000;">
-                                    <span style="color: #000;" t-field="doc.work_result" />
+                                    <span style="color: #000;" t-raw="doc.work_result" />
                                 </p>
                             </div>
 
