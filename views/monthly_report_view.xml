@@ -90,8 +90,8 @@
                         </group>
                     </group>
                     <group string="Detail">
-                        <field name="work_result" />
-                        <field name="remark" />
+                        <field name="work_result" widget="html"/>
+                        <field name="remark"/>
                     </group>
                 </sheet>
             </form>
