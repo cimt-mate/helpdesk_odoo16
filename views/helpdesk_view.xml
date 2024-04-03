@@ -9,10 +9,12 @@
                         <field name="customer_id" widget="many2one"
                             options="{'no_create':
                         True}" />
+                        <field name="ticket_title" />
                         <field name="user_name" />
                         <field name="ticket_date" />
                         <field name="worker_name" />
                         <field name="ticket_minutes" />
+
                     </group>
                     <group>
                         <field name="ticket_detail" widget="html" />
@@ -44,11 +46,11 @@
             <tree string="Helpdesk Ticket">
                 <!-- <field name="ticket_detail" /> -->
                 <field name="ticket_date" />
+                <field name="ticket_title" />
                 <field name="customer_id" />
                 <field name="worker_name" />
                 <field name="ticket_minutes" />
                 <field name="user_name" />
-
             </tree>
             <header>
                 <!-- Your new print button -->
@@ -69,6 +71,7 @@
         <field name="arch" type="xml">
             <search string="Search Helpdesk Ticket">
                 <field name="customer_id" string="Customer" />
+                <field name="ticket_title" />
                 <field name="ticket_detail" string="Ticket Detail" />
                 <field name="user_name" string="User Name" />
                 <field name="worker_name" string="Worker Name" />

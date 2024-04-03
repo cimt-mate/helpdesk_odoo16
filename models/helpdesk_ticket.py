@@ -44,6 +44,7 @@ class HelpdeskTicket(models.Model):
     )
     worker_name = fields.Char(string='Contact Name')
     ticket_minutes = fields.Integer('Ticket Minutes')
+    ticket_title = fields.Char(string='Ticket Title')
     ticket_detail = fields.Text('Ticket Detail')
     company_id = fields.Many2one('res.company', string='Company', 
         default=lambda self: self.env.company)
