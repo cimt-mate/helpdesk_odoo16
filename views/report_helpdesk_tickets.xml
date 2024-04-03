@@ -51,13 +51,14 @@
                                 Work Report</h5>
 
                             <div style="padding-top: 20px; color: #000;">
-                                <p style="padding-left: 10px;">Title: <span
+                                <p style="padding-left: 10px; padding-right: 10px;">Title: <span
                                         t-field="doc.ticket_title" /></p>
                             </div>
                             <div class=" thai-text"
                                 style="display: block; height: 930px; /* 18 lines * 18px per line */ overflow: hidden;">
                                 <!-- The content of the report -->
-                                <p style="padding-left: 10px; color: #000;"> Detail: <span
+                                <p style="padding-left: 10px; padding-right: 10px; color: #000;">
+                                    Detail: <span
                                         style="color: #000;" t-raw="doc.ticket_detail" />
                                 </p>
                             </div>
