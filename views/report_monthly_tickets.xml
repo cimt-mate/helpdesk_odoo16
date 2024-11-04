@@ -233,8 +233,8 @@
                                     <td class="th-default" style="width:120px; font-weight: bold;"
                                         rowspan="3">Backup Status</td>
                                     <td class="td-left-light" style="background-color: #FFF;"
-                                        rowspan="3" colspan="2">[<span t-field="doc.server_backup" />]
-                                        : [<span t-field="doc.outside_backup" />]</td>
+                                        rowspan="3" colspan="2">Inside [<span t-field="doc.server_backup" />]
+                                        : Outside [<span t-field="doc.outside_backup" />]</td>
                                 </tr>
 
                                 <!-- Row 5 -->
